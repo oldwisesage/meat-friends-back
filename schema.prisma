@@ -1,0 +1,33 @@
+datasource postgresql {
+  url      = env("DATABASE_URL")
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "node_modules/.prisma/client"
+}
+
+model User {
+  id       Int     @id @default(autoincrement())
+  name     String?
+  email    String? @unique
+  password String?
+}
+
+model Cut {
+  id          Int       @id @default(autoincrement())
+  name        String?
+  description String?
+  photo       CutImage? @relation("Cut_photo", fields: [photoId], references: [id])
+  photoId     Int?      @unique @map("photo")
+  status      String?
+  price       Int?
+}
+
+model CutImage {
+  id      Int     @id @default(autoincrement())
+  image   Json?
+  altText String?
+  cut     Cut?    @relation("Cut_photo")
+}
