@@ -9,20 +9,25 @@ generator client {
 }
 
 model User {
-  id       Int     @id @default(autoincrement())
-  name     String?
-  email    String? @unique
-  password String?
+  id                      Int        @id @default(autoincrement())
+  name                    String?
+  email                   String?    @unique
+  password                String?
+  cart                    CartItem[] @relation("CartItem_user")
+  passwordResetToken      String?
+  passwordResetIssuedAt   DateTime?
+  passwordResetRedeemedAt DateTime?
 }
 
 model Cut {
-  id          Int       @id @default(autoincrement())
-  name        String?
-  description String?
-  photo       CutImage? @relation("Cut_photo", fields: [photoId], references: [id])
-  photoId     Int?      @unique @map("photo")
-  status      String?
-  price       Int?
+  id                Int        @id @default(autoincrement())
+  name              String?
+  description       String?
+  photo             CutImage?  @relation("Cut_photo", fields: [photoId], references: [id])
+  photoId           Int?       @unique @map("photo")
+  status            String?
+  price             Int?
+  from_CartItem_cut CartItem[] @relation("CartItem_cut")
 }
 
 model CutImage {
@@ -30,4 +35,16 @@ model CutImage {
   image   Json?
   altText String?
   cut     Cut?    @relation("Cut_photo")
+}
+
+model CartItem {
+  id     Int   @id @default(autoincrement())
+  count  Int?
+  cut    Cut?  @relation("CartItem_cut", fields: [cutId], references: [id])
+  cutId  Int?  @map("cut")
+  user   User? @relation("CartItem_user", fields: [userId], references: [id])
+  userId Int?  @map("user")
+
+  @@index([cutId])
+  @@index([userId])
 }
