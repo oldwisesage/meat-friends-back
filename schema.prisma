@@ -38,12 +38,12 @@ model CutImage {
 }
 
 model CartItem {
-  id     Int   @id @default(autoincrement())
-  count  Int?
-  cut    Cut?  @relation("CartItem_cut", fields: [cutId], references: [id])
-  cutId  Int?  @map("cut")
-  user   User? @relation("CartItem_user", fields: [userId], references: [id])
-  userId Int?  @map("user")
+  id       Int   @id @default(autoincrement())
+  quantity Int?
+  cut      Cut?  @relation("CartItem_cut", fields: [cutId], references: [id])
+  cutId    Int?  @map("cut")
+  user     User? @relation("CartItem_user", fields: [userId], references: [id])
+  userId   Int?  @map("user")
 
   @@index([cutId])
   @@index([userId])

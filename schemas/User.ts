@@ -15,7 +15,7 @@ export const User = list({
       many: true,
       ui: {
         createView: { fieldMode: 'hidden' },
-        itemView: { fieldMode: 'hidden' },
+        itemView: { fieldMode: 'read' },
       },
     }),
   },

@@ -472,7 +472,7 @@ input CutImagesCreateInput {
 """
 type CartItem {
   id: ID!
-  count: Int
+  quantity: Int
   cut: Cut
   user: User
 }
@@ -488,14 +488,14 @@ input CartItemWhereInput {
   id_gte: ID
   id_in: [ID]
   id_not_in: [ID]
-  count: Int
-  count_not: Int
-  count_lt: Int
-  count_lte: Int
-  count_gt: Int
-  count_gte: Int
-  count_in: [Int]
-  count_not_in: [Int]
+  quantity: Int
+  quantity_not: Int
+  quantity_lt: Int
+  quantity_lte: Int
+  quantity_gt: Int
+  quantity_gte: Int
+  quantity_in: [Int]
+  quantity_not_in: [Int]
   cut: CutWhereInput
   cut_is_null: Boolean
   user: UserWhereInput
@@ -509,17 +509,17 @@ input CartItemWhereUniqueInput {
 enum SortCartItemsBy {
   id_ASC
   id_DESC
-  count_ASC
-  count_DESC
+  quantity_ASC
+  quantity_DESC
 }
 
 input CartItemOrderByInput {
   id: OrderDirection
-  count: OrderDirection
+  quantity: OrderDirection
 }
 
 input CartItemUpdateInput {
-  count: Int
+  quantity: Int
   cut: CutRelateToOneInput
   user: UserRelateToOneInput
 }
@@ -537,7 +537,7 @@ input CartItemsUpdateInput {
 }
 
 input CartItemCreateInput {
-  count: Int
+  quantity: Int
   cut: CutRelateToOneInput
   user: UserRelateToOneInput
 }
