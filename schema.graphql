@@ -687,6 +687,7 @@ type Mutation {
     token: String!
     password: String!
   ): RedeemUserPasswordResetTokenResult
+  addToCart(cutId: ID): CartItem
   endSession: Boolean!
 }
 
