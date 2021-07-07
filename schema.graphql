@@ -28,6 +28,28 @@ type User {
       reason: "This query will be removed in a future version. Please use cartCount instead."
     )
   cartCount(where: CartItemWhereInput! = {}): Int
+  orders(
+    where: OrderWhereInput! = {}
+    search: String
+    sortBy: [SortOrdersBy!]
+      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
+    orderBy: [OrderOrderByInput!]! = []
+    first: Int
+    skip: Int! = 0
+  ): [Order!]
+  _ordersMeta(
+    where: OrderWhereInput! = {}
+    search: String
+    sortBy: [SortOrdersBy!]
+      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
+    orderBy: [OrderOrderByInput!]! = []
+    first: Int
+    skip: Int! = 0
+  ): _QueryMeta
+    @deprecated(
+      reason: "This query will be removed in a future version. Please use ordersCount instead."
+    )
+  ordersCount(where: OrderWhereInput! = {}): Int
   passwordResetToken: PasswordState
   passwordResetIssuedAt: String
   passwordResetRedeemedAt: String
@@ -104,6 +126,21 @@ input UserWhereInput {
    condition must be false for all nodes
   """
   cart_none: CartItemWhereInput
+
+  """
+   condition must be true for all nodes
+  """
+  orders_every: OrderWhereInput
+
+  """
+   condition must be true for at least 1 node
+  """
+  orders_some: OrderWhereInput
+
+  """
+   condition must be false for all nodes
+  """
+  orders_none: OrderWhereInput
   passwordResetToken_is_set: Boolean
   passwordResetIssuedAt: String
   passwordResetIssuedAt_not: String
@@ -159,6 +196,7 @@ input UserUpdateInput {
   email: String
   password: String
   cart: CartItemRelateToManyInput
+  orders: OrderRelateToManyInput
   passwordResetToken: String
   passwordResetIssuedAt: String
   passwordResetRedeemedAt: String
@@ -168,6 +206,13 @@ input CartItemRelateToManyInput {
   create: [CartItemCreateInput]
   connect: [CartItemWhereUniqueInput]
   disconnect: [CartItemWhereUniqueInput]
+  disconnectAll: Boolean
+}
+
+input OrderRelateToManyInput {
+  create: [OrderCreateInput]
+  connect: [OrderWhereUniqueInput]
+  disconnect: [OrderWhereUniqueInput]
   disconnectAll: Boolean
 }
 
@@ -181,6 +226,7 @@ input UserCreateInput {
   email: String
   password: String
   cart: CartItemRelateToManyInput
+  orders: OrderRelateToManyInput
   passwordResetToken: String
   passwordResetIssuedAt: String
   passwordResetRedeemedAt: String
@@ -547,6 +593,285 @@ input CartItemsCreateInput {
 }
 
 """
+ A keystone list
+"""
+type OrderItem {
+  id: ID!
+  name: String
+  description: String
+  photo: CutImage
+  price: Int
+  quantity: Int
+  order: Order
+}
+
+input OrderItemWhereInput {
+  AND: [OrderItemWhereInput!]
+  OR: [OrderItemWhereInput!]
+  id: ID
+  id_not: ID
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID]
+  id_not_in: [ID]
+  name: String
+  name_not: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  name_i: String
+  name_not_i: String
+  name_contains_i: String
+  name_not_contains_i: String
+  name_starts_with_i: String
+  name_not_starts_with_i: String
+  name_ends_with_i: String
+  name_not_ends_with_i: String
+  name_in: [String]
+  name_not_in: [String]
+  description: String
+  description_not: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  description_i: String
+  description_not_i: String
+  description_contains_i: String
+  description_not_contains_i: String
+  description_starts_with_i: String
+  description_not_starts_with_i: String
+  description_ends_with_i: String
+  description_not_ends_with_i: String
+  description_in: [String]
+  description_not_in: [String]
+  photo: CutImageWhereInput
+  photo_is_null: Boolean
+  price: Int
+  price_not: Int
+  price_lt: Int
+  price_lte: Int
+  price_gt: Int
+  price_gte: Int
+  price_in: [Int]
+  price_not_in: [Int]
+  quantity: Int
+  quantity_not: Int
+  quantity_lt: Int
+  quantity_lte: Int
+  quantity_gt: Int
+  quantity_gte: Int
+  quantity_in: [Int]
+  quantity_not_in: [Int]
+  order: OrderWhereInput
+  order_is_null: Boolean
+}
+
+input OrderItemWhereUniqueInput {
+  id: ID
+}
+
+enum SortOrderItemsBy {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  description_ASC
+  description_DESC
+  price_ASC
+  price_DESC
+  quantity_ASC
+  quantity_DESC
+}
+
+input OrderItemOrderByInput {
+  id: OrderDirection
+  name: OrderDirection
+  description: OrderDirection
+  price: OrderDirection
+  quantity: OrderDirection
+}
+
+input OrderItemUpdateInput {
+  name: String
+  description: String
+  photo: CutImageRelateToOneInput
+  price: Int
+  quantity: Int
+  order: OrderRelateToOneInput
+}
+
+input OrderRelateToOneInput {
+  create: OrderCreateInput
+  connect: OrderWhereUniqueInput
+  disconnect: OrderWhereUniqueInput
+  disconnectAll: Boolean
+}
+
+input OrderItemsUpdateInput {
+  id: ID!
+  data: OrderItemUpdateInput
+}
+
+input OrderItemCreateInput {
+  name: String
+  description: String
+  photo: CutImageRelateToOneInput
+  price: Int
+  quantity: Int
+  order: OrderRelateToOneInput
+}
+
+input OrderItemsCreateInput {
+  data: OrderItemCreateInput
+}
+
+"""
+ A keystone list
+"""
+type Order {
+  id: ID!
+  label: String
+  total: Int
+  items(
+    where: OrderItemWhereInput! = {}
+    search: String
+    sortBy: [SortOrderItemsBy!]
+      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
+    orderBy: [OrderItemOrderByInput!]! = []
+    first: Int
+    skip: Int! = 0
+  ): [OrderItem!]
+  _itemsMeta(
+    where: OrderItemWhereInput! = {}
+    search: String
+    sortBy: [SortOrderItemsBy!]
+      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
+    orderBy: [OrderItemOrderByInput!]! = []
+    first: Int
+    skip: Int! = 0
+  ): _QueryMeta
+    @deprecated(
+      reason: "This query will be removed in a future version. Please use itemsCount instead."
+    )
+  itemsCount(where: OrderItemWhereInput! = {}): Int
+  user: User
+  charge: String
+}
+
+input OrderWhereInput {
+  AND: [OrderWhereInput!]
+  OR: [OrderWhereInput!]
+  id: ID
+  id_not: ID
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID]
+  id_not_in: [ID]
+  total: Int
+  total_not: Int
+  total_lt: Int
+  total_lte: Int
+  total_gt: Int
+  total_gte: Int
+  total_in: [Int]
+  total_not_in: [Int]
+
+  """
+   condition must be true for all nodes
+  """
+  items_every: OrderItemWhereInput
+
+  """
+   condition must be true for at least 1 node
+  """
+  items_some: OrderItemWhereInput
+
+  """
+   condition must be false for all nodes
+  """
+  items_none: OrderItemWhereInput
+  user: UserWhereInput
+  user_is_null: Boolean
+  charge: String
+  charge_not: String
+  charge_contains: String
+  charge_not_contains: String
+  charge_starts_with: String
+  charge_not_starts_with: String
+  charge_ends_with: String
+  charge_not_ends_with: String
+  charge_i: String
+  charge_not_i: String
+  charge_contains_i: String
+  charge_not_contains_i: String
+  charge_starts_with_i: String
+  charge_not_starts_with_i: String
+  charge_ends_with_i: String
+  charge_not_ends_with_i: String
+  charge_in: [String]
+  charge_not_in: [String]
+}
+
+input OrderWhereUniqueInput {
+  id: ID
+}
+
+enum SortOrdersBy {
+  id_ASC
+  id_DESC
+  total_ASC
+  total_DESC
+  charge_ASC
+  charge_DESC
+}
+
+input OrderOrderByInput {
+  id: OrderDirection
+  total: OrderDirection
+  charge: OrderDirection
+}
+
+input OrderUpdateInput {
+  total: Int
+  items: OrderItemRelateToManyInput
+  user: UserRelateToOneInput
+  charge: String
+}
+
+input OrderItemRelateToManyInput {
+  create: [OrderItemCreateInput]
+  connect: [OrderItemWhereUniqueInput]
+  disconnect: [OrderItemWhereUniqueInput]
+  disconnectAll: Boolean
+}
+
+input OrdersUpdateInput {
+  id: ID!
+  data: OrderUpdateInput
+}
+
+input OrderCreateInput {
+  total: Int
+  items: OrderItemRelateToManyInput
+  user: UserRelateToOneInput
+  charge: String
+}
+
+input OrdersCreateInput {
+  data: OrderCreateInput
+}
+
+"""
 The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
 """
 scalar JSON
@@ -674,6 +999,66 @@ type Mutation {
    Delete multiple CartItem items by ID.
   """
   deleteCartItems(ids: [ID!]): [CartItem]
+
+  """
+   Create a single OrderItem item.
+  """
+  createOrderItem(data: OrderItemCreateInput): OrderItem
+
+  """
+   Create multiple OrderItem items.
+  """
+  createOrderItems(data: [OrderItemsCreateInput]): [OrderItem]
+
+  """
+   Update a single OrderItem item by ID.
+  """
+  updateOrderItem(id: ID!, data: OrderItemUpdateInput): OrderItem
+
+  """
+   Update multiple OrderItem items by ID.
+  """
+  updateOrderItems(data: [OrderItemsUpdateInput]): [OrderItem]
+
+  """
+   Delete a single OrderItem item by ID.
+  """
+  deleteOrderItem(id: ID!): OrderItem
+
+  """
+   Delete multiple OrderItem items by ID.
+  """
+  deleteOrderItems(ids: [ID!]): [OrderItem]
+
+  """
+   Create a single Order item.
+  """
+  createOrder(data: OrderCreateInput): Order
+
+  """
+   Create multiple Order items.
+  """
+  createOrders(data: [OrdersCreateInput]): [Order]
+
+  """
+   Update a single Order item by ID.
+  """
+  updateOrder(id: ID!, data: OrderUpdateInput): Order
+
+  """
+   Update multiple Order items by ID.
+  """
+  updateOrders(data: [OrdersUpdateInput]): [Order]
+
+  """
+   Delete a single Order item by ID.
+  """
+  deleteOrder(id: ID!): Order
+
+  """
+   Delete multiple Order items by ID.
+  """
+  deleteOrders(ids: [ID!]): [Order]
   authenticateUserWithPassword(
     email: String!
     password: String!
@@ -688,6 +1073,7 @@ type Mutation {
     password: String!
   ): RedeemUserPasswordResetTokenResult
   addToCart(cutId: ID): CartItem
+  checkout(token: String!): Order
   endSession: Boolean!
 }
 
@@ -891,6 +1277,76 @@ type Query {
       reason: "This query will be removed in a future version. Please use cartItemsCount instead."
     )
   cartItemsCount(where: CartItemWhereInput! = {}): Int
+
+  """
+   Search for all OrderItem items which match the where clause.
+  """
+  allOrderItems(
+    where: OrderItemWhereInput! = {}
+    search: String
+    sortBy: [SortOrderItemsBy!]
+      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
+    orderBy: [OrderItemOrderByInput!]! = []
+    first: Int
+    skip: Int! = 0
+  ): [OrderItem!]
+
+  """
+   Search for the OrderItem item with the matching ID.
+  """
+  OrderItem(where: OrderItemWhereUniqueInput!): OrderItem
+
+  """
+   Perform a meta-query on all OrderItem items which match the where clause.
+  """
+  _allOrderItemsMeta(
+    where: OrderItemWhereInput! = {}
+    search: String
+    sortBy: [SortOrderItemsBy!]
+      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
+    orderBy: [OrderItemOrderByInput!]! = []
+    first: Int
+    skip: Int! = 0
+  ): _QueryMeta
+    @deprecated(
+      reason: "This query will be removed in a future version. Please use orderItemsCount instead."
+    )
+  orderItemsCount(where: OrderItemWhereInput! = {}): Int
+
+  """
+   Search for all Order items which match the where clause.
+  """
+  allOrders(
+    where: OrderWhereInput! = {}
+    search: String
+    sortBy: [SortOrdersBy!]
+      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
+    orderBy: [OrderOrderByInput!]! = []
+    first: Int
+    skip: Int! = 0
+  ): [Order!]
+
+  """
+   Search for the Order item with the matching ID.
+  """
+  Order(where: OrderWhereUniqueInput!): Order
+
+  """
+   Perform a meta-query on all Order items which match the where clause.
+  """
+  _allOrdersMeta(
+    where: OrderWhereInput! = {}
+    search: String
+    sortBy: [SortOrdersBy!]
+      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
+    orderBy: [OrderOrderByInput!]! = []
+    first: Int
+    skip: Int! = 0
+  ): _QueryMeta
+    @deprecated(
+      reason: "This query will be removed in a future version. Please use ordersCount instead."
+    )
+  ordersCount(where: OrderWhereInput! = {}): Int
   authenticatedItem: AuthenticatedItem
   validateUserPasswordResetToken(
     email: String!

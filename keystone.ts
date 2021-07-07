@@ -1,12 +1,14 @@
 import { extendGraphqlSchema } from './mutations/index';
 import { CartItem } from './schemas/CartItem';
+import { Order } from './schemas/Order';
+import { OrderItem } from './schemas/OrderItem';
+import { User } from './schemas/User';
+import { Cut } from './schemas/Cut';
+import { CutImage } from './schemas/CutImage';
 import 'dotenv/config';
 import { createAuth } from '@keystone-next/auth';
 import { config, createSchema } from '@keystone-next/keystone/schema';
 import { statelessSessions } from '@keystone-next/keystone/session';
-import { User } from './schemas/User';
-import { Cut } from './schemas/Cut';
-import { CutImage } from './schemas/CutImage';
 import { insertSeedData } from './seed-data/index';
 import { sendPasswordResetEmail } from './lib/mail';
 
@@ -52,7 +54,7 @@ export default withAuth(
       },
     },
     db: {
-      adapter: 'prisma_postgresql',
+      provider: 'postgresql',
       url: databaseURL,
       async onConnect() {
         console.log('✅  Connected to the database!');
@@ -64,6 +66,8 @@ export default withAuth(
       Cut,
       CutImage,
       CartItem,
+      OrderItem,
+      Order,
     }),
     extendGraphqlSchema,
     ui: {
