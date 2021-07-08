@@ -5,8 +5,6 @@ function timestamp() {
   return new Date(stampy).toISOString();
 }
 
-// TODO build new cuts data sets to seed data base
-
 export const cuts = [
   {
     name: 'Yeti Hondo',

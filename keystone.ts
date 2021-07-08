@@ -46,8 +46,6 @@ const { withAuth } = createAuth({
   },
 });
 
-// DAVE https://lucid.app/lucidchart/e7f90d1a-d8a1-4b46-afb3-0b4b099bcf47/edit?beaconFlowId=862965A0952CAB94&page=0_0#
-
 export default withAuth(
   config({
     server: {

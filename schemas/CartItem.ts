@@ -8,7 +8,6 @@ export const CartItem = list({
     },
   },
   fields: {
-    // TODO custom label
     quantity: integer({
       defaultValue: 1,
       isRequired: true,

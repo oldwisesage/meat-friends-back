@@ -73,12 +73,13 @@ model OrderItem {
 }
 
 model Order {
-  id     Int         @id @default(autoincrement())
-  total  Int?
-  items  OrderItem[] @relation("OrderItem_order")
-  user   User?       @relation("Order_user", fields: [userId], references: [id])
-  userId Int?        @map("user")
-  charge String?
+  id      Int         @id @default(autoincrement())
+  total   Int?
+  items   OrderItem[] @relation("OrderItem_order")
+  user    User?       @relation("Order_user", fields: [userId], references: [id])
+  userId  Int?        @map("user")
+  charge  String?
+  created DateTime?
 
   @@index([userId])
 }

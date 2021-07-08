@@ -836,6 +836,7 @@ type Order {
   itemsCount(where: OrderItemWhereInput! = {}): Int
   user: User
   charge: String
+  created: String
 }
 
 input OrderWhereInput {
@@ -892,6 +893,14 @@ input OrderWhereInput {
   charge_not_ends_with_i: String
   charge_in: [String]
   charge_not_in: [String]
+  created: String
+  created_not: String
+  created_lt: String
+  created_lte: String
+  created_gt: String
+  created_gte: String
+  created_in: [String]
+  created_not_in: [String]
 }
 
 input OrderWhereUniqueInput {
@@ -905,12 +914,15 @@ enum SortOrdersBy {
   total_DESC
   charge_ASC
   charge_DESC
+  created_ASC
+  created_DESC
 }
 
 input OrderOrderByInput {
   id: OrderDirection
   total: OrderDirection
   charge: OrderDirection
+  created: OrderDirection
 }
 
 input OrderUpdateInput {
@@ -918,6 +930,7 @@ input OrderUpdateInput {
   items: OrderItemRelateToManyInput
   user: UserRelateToOneInput
   charge: String
+  created: String
 }
 
 input OrderItemRelateToManyInput {
@@ -937,6 +950,7 @@ input OrderCreateInput {
   items: OrderItemRelateToManyInput
   user: UserRelateToOneInput
   charge: String
+  created: String
 }
 
 input OrdersCreateInput {
