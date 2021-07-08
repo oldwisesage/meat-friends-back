@@ -15,6 +15,8 @@ model User {
   password                String?
   cart                    CartItem[] @relation("CartItem_user")
   orders                  Order[]    @relation("Order_user")
+  address                 Address[]  @relation("Address_user")
+  created                 DateTime?
   passwordResetToken      String?
   passwordResetIssuedAt   DateTime?
   passwordResetRedeemedAt DateTime?
@@ -24,11 +26,15 @@ model Cut {
   id                Int        @id @default(autoincrement())
   name              String?
   description       String?
-  photo             CutImage?  @relation("Cut_photo", fields: [photoId], references: [id])
-  photoId           Int?       @unique @map("photo")
   status            String?
   price             Int?
+  animal            Animal?    @relation("Cut_animal", fields: [animalId], references: [id])
+  animalId          Int?       @map("animal")
+  photo             CutImage?  @relation("Cut_photo", fields: [photoId], references: [id])
+  photoId           Int?       @unique @map("photo")
   from_CartItem_cut CartItem[] @relation("CartItem_cut")
+
+  @@index([animalId])
 }
 
 model CutImage {
@@ -75,4 +81,41 @@ model Order {
   charge String?
 
   @@index([userId])
+}
+
+model Address {
+  id          Int       @id @default(autoincrement())
+  type        String?
+  streetNum   String?
+  street      String?
+  city        String?
+  state       String?
+  zip         String?
+  dateCreated DateTime?
+  user        User?     @relation("Address_user", fields: [userId], references: [id])
+  userId      Int?      @map("user")
+
+  @@index([userId])
+}
+
+model Farm {
+  id          Int       @id @default(autoincrement())
+  name        String?
+  description String?
+  city        String?
+  state       String?
+  dateCreated DateTime?
+  animals     Animal[]  @relation("Animal_farm")
+}
+
+model Animal {
+  id          Int       @id @default(autoincrement())
+  type        String?
+  description String?
+  dateCreated DateTime?
+  farm        Farm?     @relation("Animal_farm", fields: [farmId], references: [id])
+  farmId      Int?      @map("farm")
+  cuts        Cut[]     @relation("Cut_animal")
+
+  @@index([farmId])
 }

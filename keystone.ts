@@ -1,5 +1,8 @@
 import { extendGraphqlSchema } from './mutations/index';
 import { CartItem } from './schemas/CartItem';
+import { Address } from './schemas/Address';
+import { Farm } from './schemas/Farm';
+import { Animal } from './schemas/Animal';
 import { Order } from './schemas/Order';
 import { OrderItem } from './schemas/OrderItem';
 import { User } from './schemas/User';
@@ -56,6 +59,7 @@ export default withAuth(
     db: {
       provider: 'postgresql',
       url: databaseURL,
+      idField: { kind: 'uuid' },
       async onConnect() {
         console.log('✅  Connected to the database!');
         if (process.argv.includes('--seed-data')) await insertSeedData();
@@ -68,6 +72,9 @@ export default withAuth(
       CartItem,
       OrderItem,
       Order,
+      Address,
+      Farm,
+      Animal,
     }),
     extendGraphqlSchema,
     ui: {

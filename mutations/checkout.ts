@@ -5,7 +5,6 @@ import {
 } from '../.keystone/schema-types';
 import stripeConfig from '../lib/stripe';
 
-// LEARN understand this shit better!
 const graphql = String.raw;
 
 // LEARN understand the top part of this better better!!

@@ -2,9 +2,9 @@ import { list } from '@keystone-next/keystone/schema';
 import {
   relationship,
   integer,
-  select,
   text,
   virtual,
+  timestamp,
 } from '@keystone-next/fields';
 import { schema } from '@keystone-next/types';
 import formatMoney from '../lib/formatMoney';
@@ -24,5 +24,6 @@ export const Order = list({
     items: relationship({ ref: 'OrderItem.order', many: true }),
     user: relationship({ ref: 'User.orders' }),
     charge: text(),
+    created: timestamp(),
   },
 });

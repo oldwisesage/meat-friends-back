@@ -1,6 +1,6 @@
 import { CartItem } from './CartItem';
 import { list } from '@keystone-next/keystone/schema';
-import { text, password, relationship } from '@keystone-next/fields';
+import { text, password, relationship, timestamp } from '@keystone-next/fields';
 
 // TODO add address, order history,
 
@@ -19,5 +19,7 @@ export const User = list({
       },
     }),
     orders: relationship({ ref: 'Order.user', many: true }),
+    address: relationship({ ref: 'Address.user', many: true }),
+    created: timestamp(),
   },
 });

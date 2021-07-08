@@ -5,26 +5,15 @@ import {
   select,
   text,
   autoIncrement,
+  json,
 } from '@keystone-next/fields';
 import { v4 as uuidv4 } from 'uuid';
 
 export const Cut = list({
   // access:
   fields: {
-    // DAVE how to implment custom id function uuid?
     name: text({ isRequired: true }),
     description: text({ ui: { displayMode: 'textarea' } }),
-
-    // TODO add all data types for actual application
-    photo: relationship({
-      ref: 'CutImage.cut',
-      ui: {
-        displayMode: 'cards',
-        cardFields: ['image', 'altText'],
-        inlineCreate: { fields: ['image', 'altText'] },
-        inlineEdit: { fields: ['image', 'altText'] },
-      },
-    }),
     status: select({
       options: [
         { label: 'draft', value: 'draft' },
@@ -38,5 +27,18 @@ export const Cut = list({
       },
     }),
     price: integer({ isRequired: true }),
+    animal: relationship({ ref: 'Animal.cuts' }),
+    photo: relationship({
+      ref: 'CutImage.cut',
+      ui: {
+        displayMode: 'cards',
+        cardFields: ['image', 'altText'],
+        inlineCreate: { fields: ['image', 'altText'] },
+        inlineEdit: { fields: ['image', 'altText'] },
+      },
+    }),
+    // TODO Add cooking methods as schema to relate here
+    // TODO add why its good here
+    // TODO add primal part here
   },
 });
