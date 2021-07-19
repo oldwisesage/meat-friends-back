@@ -4,7 +4,6 @@ import { relationship, integer, select, text } from '@keystone-next/fields';
 export const OrderItem = list({
   // access:
   fields: {
-    // DAVE how to implment custom id function uuid?
     name: text({ isRequired: true }),
     description: text({ ui: { displayMode: 'textarea' } }),
 
