@@ -5,6 +5,7 @@ import { text, password, relationship, timestamp } from '@keystone-next/fields';
 export const User = list({
   fields: {
     name: text({ isRequired: true }),
+    lastName: text({ isRequired: true }),
     email: text({ isRequired: true, isUnique: true }),
     password: password(),
     cart: relationship({

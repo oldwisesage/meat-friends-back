@@ -11,6 +11,7 @@ generator client {
 model User {
   id                      Int        @id @default(autoincrement())
   name                    String?
+  lastName                String?
   email                   String?    @unique
   password                String?
   cart                    CartItem[] @relation("CartItem_user")
@@ -85,16 +86,13 @@ model Order {
 }
 
 model Address {
-  id          Int       @id @default(autoincrement())
-  type        String?
-  streetNum   String?
-  street      String?
-  city        String?
-  state       String?
-  zip         String?
-  dateCreated DateTime?
-  user        User?     @relation("Address_user", fields: [userId], references: [id])
-  userId      Int?      @map("user")
+  id     Int     @id @default(autoincrement())
+  street String?
+  city   String?
+  state  String?
+  zip    String?
+  user   User?   @relation("Address_user", fields: [userId], references: [id])
+  userId Int?    @map("user")
 
   @@index([userId])
 }

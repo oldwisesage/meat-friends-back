@@ -17,11 +17,6 @@ import { sendPasswordResetEmail } from './lib/mail';
 
 const databaseURL = process.env.DATABASE_URL;
 
-// const sessionConfig = {
-//   maxAge: 60 * 60 * 24 * 360, // How long they stay signed in?
-//   secret: process.env.COOKIE_SECRET,
-// };
-
 const session = statelessSessions({
   maxAge: 60 * 60 * 24 * 360, // How long they stay signed in?
   secret: process.env.COOKIE_SECRET,

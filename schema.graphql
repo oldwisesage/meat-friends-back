@@ -4,6 +4,7 @@
 type User {
   id: ID!
   name: String
+  lastName: String
   email: String
   password: PasswordState
   cart(
@@ -115,6 +116,24 @@ input UserWhereInput {
   name_not_ends_with_i: String
   name_in: [String]
   name_not_in: [String]
+  lastName: String
+  lastName_not: String
+  lastName_contains: String
+  lastName_not_contains: String
+  lastName_starts_with: String
+  lastName_not_starts_with: String
+  lastName_ends_with: String
+  lastName_not_ends_with: String
+  lastName_i: String
+  lastName_not_i: String
+  lastName_contains_i: String
+  lastName_not_contains_i: String
+  lastName_starts_with_i: String
+  lastName_not_starts_with_i: String
+  lastName_ends_with_i: String
+  lastName_not_ends_with_i: String
+  lastName_in: [String]
+  lastName_not_in: [String]
   email: String
   email_not: String
   email_contains: String
@@ -216,6 +235,8 @@ enum SortUsersBy {
   id_DESC
   name_ASC
   name_DESC
+  lastName_ASC
+  lastName_DESC
   email_ASC
   email_DESC
   created_ASC
@@ -229,6 +250,7 @@ enum SortUsersBy {
 input UserOrderByInput {
   id: OrderDirection
   name: OrderDirection
+  lastName: OrderDirection
   email: OrderDirection
   created: OrderDirection
   passwordResetIssuedAt: OrderDirection
@@ -242,6 +264,7 @@ enum OrderDirection {
 
 input UserUpdateInput {
   name: String
+  lastName: String
   email: String
   password: String
   cart: CartItemRelateToManyInput
@@ -281,6 +304,7 @@ input UsersUpdateInput {
 
 input UserCreateInput {
   name: String
+  lastName: String
   email: String
   password: String
   cart: CartItemRelateToManyInput
@@ -962,13 +986,10 @@ input OrdersCreateInput {
 """
 type Address {
   id: ID!
-  type: String
-  streetNum: String
   street: String
   city: String
   state: String
   zip: String
-  dateCreated: String
   user: User
 }
 
@@ -983,28 +1004,6 @@ input AddressWhereInput {
   id_gte: ID
   id_in: [ID]
   id_not_in: [ID]
-  type: String
-  type_not: String
-  type_in: [String]
-  type_not_in: [String]
-  streetNum: String
-  streetNum_not: String
-  streetNum_contains: String
-  streetNum_not_contains: String
-  streetNum_starts_with: String
-  streetNum_not_starts_with: String
-  streetNum_ends_with: String
-  streetNum_not_ends_with: String
-  streetNum_i: String
-  streetNum_not_i: String
-  streetNum_contains_i: String
-  streetNum_not_contains_i: String
-  streetNum_starts_with_i: String
-  streetNum_not_starts_with_i: String
-  streetNum_ends_with_i: String
-  streetNum_not_ends_with_i: String
-  streetNum_in: [String]
-  streetNum_not_in: [String]
   street: String
   street_not: String
   street_contains: String
@@ -1077,14 +1076,6 @@ input AddressWhereInput {
   zip_not_ends_with_i: String
   zip_in: [String]
   zip_not_in: [String]
-  dateCreated: String
-  dateCreated_not: String
-  dateCreated_lt: String
-  dateCreated_lte: String
-  dateCreated_gt: String
-  dateCreated_gte: String
-  dateCreated_in: [String]
-  dateCreated_not_in: [String]
   user: UserWhereInput
   user_is_null: Boolean
 }
@@ -1096,10 +1087,6 @@ input AddressWhereUniqueInput {
 enum SortAddressesBy {
   id_ASC
   id_DESC
-  type_ASC
-  type_DESC
-  streetNum_ASC
-  streetNum_DESC
   street_ASC
   street_DESC
   city_ASC
@@ -1108,29 +1095,21 @@ enum SortAddressesBy {
   state_DESC
   zip_ASC
   zip_DESC
-  dateCreated_ASC
-  dateCreated_DESC
 }
 
 input AddressOrderByInput {
   id: OrderDirection
-  type: OrderDirection
-  streetNum: OrderDirection
   street: OrderDirection
   city: OrderDirection
   state: OrderDirection
   zip: OrderDirection
-  dateCreated: OrderDirection
 }
 
 input AddressUpdateInput {
-  type: String
-  streetNum: String
   street: String
   city: String
   state: String
   zip: String
-  dateCreated: String
   user: UserRelateToOneInput
 }
 
@@ -1140,13 +1119,10 @@ input AddressesUpdateInput {
 }
 
 input AddressCreateInput {
-  type: String
-  streetNum: String
   street: String
   city: String
   state: String
   zip: String
-  dateCreated: String
   user: UserRelateToOneInput
 }
 
