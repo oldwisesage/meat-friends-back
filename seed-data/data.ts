@@ -5,7 +5,7 @@ function timestamp() {
   return new Date(stampy).toISOString();
 }
 
-export const user = [
+export const users = [
   {
     name: 'Teresa',
     lastName: 'Mycock',
@@ -408,7 +408,7 @@ export const cuts = [
     name: 'Bone-in Tomahawk',
     weight: 2.4,
     price: 3800,
-    status: false,
+    status: 'available',
     description: 'engineer 24/7 platforms',
     photo: {
       filename: 'steak-tomahawk.jpg',
@@ -605,10 +605,10 @@ export const cuts = [
     },
   },
   {
-    name: 'Common wallaroo',
-    weight: 37.5,
-    price: 60,
-    status: false,
+    name: 'Country chop',
+    weight: 0.6,
+    price: 1200,
+    status: 'avialable',
     description: 'e-enable open-source vortals',
     photo: {
       filename: 'country-chop.jpg',
@@ -658,7 +658,7 @@ export const cuts = [
     name: 'Osso buco',
     weight: 1.2,
     price: 1250,
-    status: true,
+    status: 'available',
     description: 'engineer web-enabled action-items',
     photo: {
       filename: 'osso-buco.jpg',
@@ -708,7 +708,7 @@ export const cuts = [
     name: 'Bacon',
     weight: 1,
     price: 12,
-    status: true,
+    status: 'available',
     description: 'seize B2B platforms',
     photo: {
       filename: 'bacon.jpg',
@@ -908,7 +908,7 @@ export const cuts = [
     name: 'Whole Chicken',
     weight: 1.5,
     price: 1500,
-    status: false,
+    status: 'available',
     description: 'evolve bricks-and-clicks models',
     photo: {
       filename: 'whole-chicken.jpb',
@@ -933,7 +933,7 @@ export const cuts = [
     name: 'Porterhouse',
     weight: 1.5,
     price: 2600,
-    status: true,
+    status: 'available',
     description: 'enhance open-source niches',
     photo: {
       filename: 'porterhouse.jpg',
@@ -958,7 +958,7 @@ export const cuts = [
     name: 'Beef Burger Patties',
     weight: 1.2,
     price: 1400,
-    status: true,
+    status: 'available',
     description: 'brand holistic bandwidth',
     photo: {
       filename: 'beef-burger.jpg',
@@ -983,7 +983,7 @@ export const cuts = [
     name: 'Bistro steak',
     weight: 1,
     price: 1400,
-    status: false,
+    status: 'available',
     description: 'extend real-time e-business',
     photo: {
       filename: 'bistro-steak.jpg',

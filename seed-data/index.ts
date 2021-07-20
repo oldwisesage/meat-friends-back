@@ -10,7 +10,7 @@ export async function insertSeedData() {
     `🌱 Inserting Seed Data: ${cuts.length} total cuts & ${users.length} total users`
   );
   for (const cut of cuts) {
-    console.log(`🛍️ Adding cut: ${cut.name}`);
+    console.log(`🥩 Adding cut: ${cut.name}`);
     await prisma.cut.create({
       data: {
         name: cut.name,
@@ -27,7 +27,7 @@ export async function insertSeedData() {
 
   console.log(`🐤 Starting user seed now.....`);
   for (const user of users) {
-    console.log(`👽 Adding user: ${user.firstName} ${user.lastName}`);
+    console.log(`👽 Adding user: ${user.name} ${user.lastName}`);
     await prisma.user.create({
       data: {
         name: user.name,
