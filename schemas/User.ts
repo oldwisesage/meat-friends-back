@@ -4,10 +4,7 @@ import { text, password, relationship, timestamp } from '@keystone-next/fields';
 
 export const User = list({
   fields: {
-    name: text({ isRequired: true }),
-    lastName: text({ isRequired: true }),
-    email: text({ isRequired: true, isUnique: true }),
-    password: password(),
+    orders: relationship({ ref: 'Order.user', many: true }),
     cart: relationship({
       ref: 'CartItem.user',
       many: true,
@@ -16,8 +13,15 @@ export const User = list({
         itemView: { fieldMode: 'read' },
       },
     }),
-    orders: relationship({ ref: 'Order.user', many: true }),
+    // avatar: relationship({ ref: 'Avatar.user' }),
     address: relationship({ ref: 'Address.user', many: true }),
-    created: timestamp(),
+    setting: relationship({ ref: 'Setting.user' }),
+    name: text({ isRequired: true }),
+    lastName: text({ isRequired: true }),
+    email: text({ isRequired: true, isUnique: true }),
+    password: password(),
+    stripePay: text(),
+    createdAt: timestamp(),
+    lastVisitAt: timestamp(),
   },
 });

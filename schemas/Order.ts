@@ -12,18 +12,14 @@ import formatMoney from '../lib/formatMoney';
 export const Order = list({
   // LEARN understand virtual fields better
   fields: {
-    label: virtual({
-      field: schema.field({
-        type: schema.String,
-        resolve(item) {
-          return `${formatMoney(item.total)}`;
-        },
-      }), //
-    }),
-    total: integer(),
     items: relationship({ ref: 'OrderItem.order', many: true }),
     user: relationship({ ref: 'User.orders' }),
+    total: integer(),
     charge: text(),
-    created: timestamp(),
+    createdAt: timestamp(),
+    confirmedAt: timestamp(),
+    filledAt: timestamp(),
+    shippedAt: timestamp(),
+    deliveredAt: timestamp(),
   },
 });

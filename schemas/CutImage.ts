@@ -12,16 +12,11 @@ export const cloudinary = {
 
 export const CutImage = list({
   fields: {
+    cut: relationship({ ref: 'Cut.photo' }),
     image: cloudinaryImage({
       cloudinary,
       label: 'source',
     }),
     altText: text(),
-    cut: relationship({ ref: 'Cut.photo' }),
-  },
-  ui: {
-    listView: {
-      initialColumns: ['image', 'cut', 'altText'],
-    },
   },
 });

@@ -1,3 +1,4 @@
+import { Breed } from './schemas/Breed';
 import { extendGraphqlSchema } from './mutations/index';
 import { CartItem } from './schemas/CartItem';
 import { Address } from './schemas/Address';
@@ -8,6 +9,7 @@ import { OrderItem } from './schemas/OrderItem';
 import { User } from './schemas/User';
 import { Cut } from './schemas/Cut';
 import { CutImage } from './schemas/CutImage';
+import { Setting } from './schemas/Setting';
 import 'dotenv/config';
 import { createAuth } from '@keystone-next/auth';
 import { config, createSchema } from '@keystone-next/keystone/schema';
@@ -59,15 +61,17 @@ export default withAuth(
       },
     },
     lists: createSchema({
-      User,
+      Address,
+      Animal,
+      Breed,
+      CartItem,
       Cut,
       CutImage,
-      CartItem,
-      OrderItem,
-      Order,
-      Address,
       Farm,
-      Animal,
+      Order,
+      OrderItem,
+      Setting,
+      User,
     }),
     extendGraphqlSchema,
     ui: {

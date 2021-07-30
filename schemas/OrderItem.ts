@@ -1,13 +1,16 @@
 import { list } from '@keystone-next/keystone/schema';
-import { relationship, integer, select, text } from '@keystone-next/fields';
+import {
+  relationship,
+  integer,
+  select,
+  text,
+  timestamp,
+} from '@keystone-next/fields';
 
 export const OrderItem = list({
   // access:
   fields: {
-    name: text({ isRequired: true }),
-    description: text({ ui: { displayMode: 'textarea' } }),
-
-    // TODO add all data types for actual application
+    order: relationship({ ref: 'Order.items' }),
     photo: relationship({
       ref: 'CutImage',
       ui: {
@@ -17,8 +20,10 @@ export const OrderItem = list({
         inlineEdit: { fields: ['image', 'altText'] },
       },
     }),
+    name: text({ isRequired: true }),
     price: integer({ isRequired: true }),
     quantity: integer({ isRequired: true }),
-    order: relationship({ ref: 'Order.items' }),
+    description: text({ ui: { displayMode: 'textarea' } }),
+    createdAt: timestamp(),
   },
 });

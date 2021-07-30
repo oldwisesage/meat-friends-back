@@ -1,996 +1,14 @@
 """
  A keystone list
 """
-type User {
-  id: ID!
-  name: String
-  lastName: String
-  email: String
-  password: PasswordState
-  cart(
-    where: CartItemWhereInput! = {}
-    search: String
-    sortBy: [SortCartItemsBy!]
-      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
-    orderBy: [CartItemOrderByInput!]! = []
-    first: Int
-    skip: Int! = 0
-  ): [CartItem!]
-  _cartMeta(
-    where: CartItemWhereInput! = {}
-    search: String
-    sortBy: [SortCartItemsBy!]
-      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
-    orderBy: [CartItemOrderByInput!]! = []
-    first: Int
-    skip: Int! = 0
-  ): _QueryMeta
-    @deprecated(
-      reason: "This query will be removed in a future version. Please use cartCount instead."
-    )
-  cartCount(where: CartItemWhereInput! = {}): Int
-  orders(
-    where: OrderWhereInput! = {}
-    search: String
-    sortBy: [SortOrdersBy!]
-      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
-    orderBy: [OrderOrderByInput!]! = []
-    first: Int
-    skip: Int! = 0
-  ): [Order!]
-  _ordersMeta(
-    where: OrderWhereInput! = {}
-    search: String
-    sortBy: [SortOrdersBy!]
-      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
-    orderBy: [OrderOrderByInput!]! = []
-    first: Int
-    skip: Int! = 0
-  ): _QueryMeta
-    @deprecated(
-      reason: "This query will be removed in a future version. Please use ordersCount instead."
-    )
-  ordersCount(where: OrderWhereInput! = {}): Int
-  address(
-    where: AddressWhereInput! = {}
-    search: String
-    sortBy: [SortAddressesBy!]
-      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
-    orderBy: [AddressOrderByInput!]! = []
-    first: Int
-    skip: Int! = 0
-  ): [Address!]
-  _addressMeta(
-    where: AddressWhereInput! = {}
-    search: String
-    sortBy: [SortAddressesBy!]
-      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
-    orderBy: [AddressOrderByInput!]! = []
-    first: Int
-    skip: Int! = 0
-  ): _QueryMeta
-    @deprecated(
-      reason: "This query will be removed in a future version. Please use addressCount instead."
-    )
-  addressCount(where: AddressWhereInput! = {}): Int
-  created: String
-  passwordResetToken: PasswordState
-  passwordResetIssuedAt: String
-  passwordResetRedeemedAt: String
-}
-
-type PasswordState {
-  isSet: Boolean!
-}
-
-type _QueryMeta {
-  count: Int
-}
-
-input UserWhereInput {
-  AND: [UserWhereInput!]
-  OR: [UserWhereInput!]
-  id: ID
-  id_not: ID
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_in: [ID]
-  id_not_in: [ID]
-  name: String
-  name_not: String
-  name_contains: String
-  name_not_contains: String
-  name_starts_with: String
-  name_not_starts_with: String
-  name_ends_with: String
-  name_not_ends_with: String
-  name_i: String
-  name_not_i: String
-  name_contains_i: String
-  name_not_contains_i: String
-  name_starts_with_i: String
-  name_not_starts_with_i: String
-  name_ends_with_i: String
-  name_not_ends_with_i: String
-  name_in: [String]
-  name_not_in: [String]
-  lastName: String
-  lastName_not: String
-  lastName_contains: String
-  lastName_not_contains: String
-  lastName_starts_with: String
-  lastName_not_starts_with: String
-  lastName_ends_with: String
-  lastName_not_ends_with: String
-  lastName_i: String
-  lastName_not_i: String
-  lastName_contains_i: String
-  lastName_not_contains_i: String
-  lastName_starts_with_i: String
-  lastName_not_starts_with_i: String
-  lastName_ends_with_i: String
-  lastName_not_ends_with_i: String
-  lastName_in: [String]
-  lastName_not_in: [String]
-  email: String
-  email_not: String
-  email_contains: String
-  email_not_contains: String
-  email_starts_with: String
-  email_not_starts_with: String
-  email_ends_with: String
-  email_not_ends_with: String
-  email_i: String
-  email_not_i: String
-  email_contains_i: String
-  email_not_contains_i: String
-  email_starts_with_i: String
-  email_not_starts_with_i: String
-  email_ends_with_i: String
-  email_not_ends_with_i: String
-  email_in: [String]
-  email_not_in: [String]
-  password_is_set: Boolean
-
-  """
-   condition must be true for all nodes
-  """
-  cart_every: CartItemWhereInput
-
-  """
-   condition must be true for at least 1 node
-  """
-  cart_some: CartItemWhereInput
-
-  """
-   condition must be false for all nodes
-  """
-  cart_none: CartItemWhereInput
-
-  """
-   condition must be true for all nodes
-  """
-  orders_every: OrderWhereInput
-
-  """
-   condition must be true for at least 1 node
-  """
-  orders_some: OrderWhereInput
-
-  """
-   condition must be false for all nodes
-  """
-  orders_none: OrderWhereInput
-
-  """
-   condition must be true for all nodes
-  """
-  address_every: AddressWhereInput
-
-  """
-   condition must be true for at least 1 node
-  """
-  address_some: AddressWhereInput
-
-  """
-   condition must be false for all nodes
-  """
-  address_none: AddressWhereInput
-  created: String
-  created_not: String
-  created_lt: String
-  created_lte: String
-  created_gt: String
-  created_gte: String
-  created_in: [String]
-  created_not_in: [String]
-  passwordResetToken_is_set: Boolean
-  passwordResetIssuedAt: String
-  passwordResetIssuedAt_not: String
-  passwordResetIssuedAt_lt: String
-  passwordResetIssuedAt_lte: String
-  passwordResetIssuedAt_gt: String
-  passwordResetIssuedAt_gte: String
-  passwordResetIssuedAt_in: [String]
-  passwordResetIssuedAt_not_in: [String]
-  passwordResetRedeemedAt: String
-  passwordResetRedeemedAt_not: String
-  passwordResetRedeemedAt_lt: String
-  passwordResetRedeemedAt_lte: String
-  passwordResetRedeemedAt_gt: String
-  passwordResetRedeemedAt_gte: String
-  passwordResetRedeemedAt_in: [String]
-  passwordResetRedeemedAt_not_in: [String]
-}
-
-input UserWhereUniqueInput {
-  id: ID
-  email: String
-}
-
-enum SortUsersBy {
-  id_ASC
-  id_DESC
-  name_ASC
-  name_DESC
-  lastName_ASC
-  lastName_DESC
-  email_ASC
-  email_DESC
-  created_ASC
-  created_DESC
-  passwordResetIssuedAt_ASC
-  passwordResetIssuedAt_DESC
-  passwordResetRedeemedAt_ASC
-  passwordResetRedeemedAt_DESC
-}
-
-input UserOrderByInput {
-  id: OrderDirection
-  name: OrderDirection
-  lastName: OrderDirection
-  email: OrderDirection
-  created: OrderDirection
-  passwordResetIssuedAt: OrderDirection
-  passwordResetRedeemedAt: OrderDirection
-}
-
-enum OrderDirection {
-  asc
-  desc
-}
-
-input UserUpdateInput {
-  name: String
-  lastName: String
-  email: String
-  password: String
-  cart: CartItemRelateToManyInput
-  orders: OrderRelateToManyInput
-  address: AddressRelateToManyInput
-  created: String
-  passwordResetToken: String
-  passwordResetIssuedAt: String
-  passwordResetRedeemedAt: String
-}
-
-input CartItemRelateToManyInput {
-  create: [CartItemCreateInput]
-  connect: [CartItemWhereUniqueInput]
-  disconnect: [CartItemWhereUniqueInput]
-  disconnectAll: Boolean
-}
-
-input OrderRelateToManyInput {
-  create: [OrderCreateInput]
-  connect: [OrderWhereUniqueInput]
-  disconnect: [OrderWhereUniqueInput]
-  disconnectAll: Boolean
-}
-
-input AddressRelateToManyInput {
-  create: [AddressCreateInput]
-  connect: [AddressWhereUniqueInput]
-  disconnect: [AddressWhereUniqueInput]
-  disconnectAll: Boolean
-}
-
-input UsersUpdateInput {
-  id: ID!
-  data: UserUpdateInput
-}
-
-input UserCreateInput {
-  name: String
-  lastName: String
-  email: String
-  password: String
-  cart: CartItemRelateToManyInput
-  orders: OrderRelateToManyInput
-  address: AddressRelateToManyInput
-  created: String
-  passwordResetToken: String
-  passwordResetIssuedAt: String
-  passwordResetRedeemedAt: String
-}
-
-input UsersCreateInput {
-  data: UserCreateInput
-}
-
-"""
- A keystone list
-"""
-type Cut {
-  id: ID!
-  name: String
-  description: String
-  status: String
-  price: Int
-  animal: Animal
-  photo: CutImage
-}
-
-input CutWhereInput {
-  AND: [CutWhereInput!]
-  OR: [CutWhereInput!]
-  id: ID
-  id_not: ID
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_in: [ID]
-  id_not_in: [ID]
-  name: String
-  name_not: String
-  name_contains: String
-  name_not_contains: String
-  name_starts_with: String
-  name_not_starts_with: String
-  name_ends_with: String
-  name_not_ends_with: String
-  name_i: String
-  name_not_i: String
-  name_contains_i: String
-  name_not_contains_i: String
-  name_starts_with_i: String
-  name_not_starts_with_i: String
-  name_ends_with_i: String
-  name_not_ends_with_i: String
-  name_in: [String]
-  name_not_in: [String]
-  description: String
-  description_not: String
-  description_contains: String
-  description_not_contains: String
-  description_starts_with: String
-  description_not_starts_with: String
-  description_ends_with: String
-  description_not_ends_with: String
-  description_i: String
-  description_not_i: String
-  description_contains_i: String
-  description_not_contains_i: String
-  description_starts_with_i: String
-  description_not_starts_with_i: String
-  description_ends_with_i: String
-  description_not_ends_with_i: String
-  description_in: [String]
-  description_not_in: [String]
-  status: String
-  status_not: String
-  status_in: [String]
-  status_not_in: [String]
-  price: Int
-  price_not: Int
-  price_lt: Int
-  price_lte: Int
-  price_gt: Int
-  price_gte: Int
-  price_in: [Int]
-  price_not_in: [Int]
-  animal: AnimalWhereInput
-  animal_is_null: Boolean
-  photo: CutImageWhereInput
-  photo_is_null: Boolean
-}
-
-input CutWhereUniqueInput {
-  id: ID
-}
-
-enum SortCutsBy {
-  id_ASC
-  id_DESC
-  name_ASC
-  name_DESC
-  description_ASC
-  description_DESC
-  status_ASC
-  status_DESC
-  price_ASC
-  price_DESC
-}
-
-input CutOrderByInput {
-  id: OrderDirection
-  name: OrderDirection
-  description: OrderDirection
-  status: OrderDirection
-  price: OrderDirection
-}
-
-input CutUpdateInput {
-  name: String
-  description: String
-  status: String
-  price: Int
-  animal: AnimalRelateToOneInput
-  photo: CutImageRelateToOneInput
-}
-
-input AnimalRelateToOneInput {
-  create: AnimalCreateInput
-  connect: AnimalWhereUniqueInput
-  disconnect: AnimalWhereUniqueInput
-  disconnectAll: Boolean
-}
-
-input CutImageRelateToOneInput {
-  create: CutImageCreateInput
-  connect: CutImageWhereUniqueInput
-  disconnect: CutImageWhereUniqueInput
-  disconnectAll: Boolean
-}
-
-input CutsUpdateInput {
-  id: ID!
-  data: CutUpdateInput
-}
-
-input CutCreateInput {
-  name: String
-  description: String
-  status: String
-  price: Int
-  animal: AnimalRelateToOneInput
-  photo: CutImageRelateToOneInput
-}
-
-input CutsCreateInput {
-  data: CutCreateInput
-}
-
-"""
- A keystone list
-"""
-type CutImage {
-  id: ID!
-  image: CloudinaryImage_File
-  altText: String
-  cut: Cut
-}
-
-type CloudinaryImage_File {
-  id: ID
-  filename: String
-  originalFilename: String
-  mimetype: String
-  encoding: String
-  publicUrl: String
-  publicUrlTransformed(transformation: CloudinaryImageFormat): String
-}
-
-"""
-Mirrors the formatting options [Cloudinary provides](https://cloudinary.com/documentation/image_transformation_reference).
-All options are strings as they ultimately end up in a URL.
-"""
-input CloudinaryImageFormat {
-  """
-   Rewrites the filename to be this pretty string. Do not include `/` or `.`
-  """
-  prettyName: String
-  width: String
-  height: String
-  crop: String
-  aspect_ratio: String
-  gravity: String
-  zoom: String
-  x: String
-  y: String
-  format: String
-  fetch_format: String
-  quality: String
-  radius: String
-  angle: String
-  effect: String
-  opacity: String
-  border: String
-  background: String
-  overlay: String
-  underlay: String
-  default_image: String
-  delay: String
-  color: String
-  color_space: String
-  dpr: String
-  page: String
-  density: String
-  flags: String
-  transformation: String
-}
-
-input CutImageWhereInput {
-  AND: [CutImageWhereInput!]
-  OR: [CutImageWhereInput!]
-  id: ID
-  id_not: ID
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_in: [ID]
-  id_not_in: [ID]
-  image: String
-  image_not: String
-  image_in: [String]
-  image_not_in: [String]
-  altText: String
-  altText_not: String
-  altText_contains: String
-  altText_not_contains: String
-  altText_starts_with: String
-  altText_not_starts_with: String
-  altText_ends_with: String
-  altText_not_ends_with: String
-  altText_i: String
-  altText_not_i: String
-  altText_contains_i: String
-  altText_not_contains_i: String
-  altText_starts_with_i: String
-  altText_not_starts_with_i: String
-  altText_ends_with_i: String
-  altText_not_ends_with_i: String
-  altText_in: [String]
-  altText_not_in: [String]
-  cut: CutWhereInput
-  cut_is_null: Boolean
-}
-
-input CutImageWhereUniqueInput {
-  id: ID
-}
-
-enum SortCutImagesBy {
-  id_ASC
-  id_DESC
-  altText_ASC
-  altText_DESC
-}
-
-input CutImageOrderByInput {
-  id: OrderDirection
-  altText: OrderDirection
-}
-
-input CutImageUpdateInput {
-  image: Upload
-  altText: String
-  cut: CutRelateToOneInput
-}
-
-"""
-The `Upload` scalar type represents a file upload.
-"""
-scalar Upload
-
-input CutRelateToOneInput {
-  create: CutCreateInput
-  connect: CutWhereUniqueInput
-  disconnect: CutWhereUniqueInput
-  disconnectAll: Boolean
-}
-
-input CutImagesUpdateInput {
-  id: ID!
-  data: CutImageUpdateInput
-}
-
-input CutImageCreateInput {
-  image: Upload
-  altText: String
-  cut: CutRelateToOneInput
-}
-
-input CutImagesCreateInput {
-  data: CutImageCreateInput
-}
-
-"""
- A keystone list
-"""
-type CartItem {
-  id: ID!
-  quantity: Int
-  cut: Cut
-  user: User
-}
-
-input CartItemWhereInput {
-  AND: [CartItemWhereInput!]
-  OR: [CartItemWhereInput!]
-  id: ID
-  id_not: ID
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_in: [ID]
-  id_not_in: [ID]
-  quantity: Int
-  quantity_not: Int
-  quantity_lt: Int
-  quantity_lte: Int
-  quantity_gt: Int
-  quantity_gte: Int
-  quantity_in: [Int]
-  quantity_not_in: [Int]
-  cut: CutWhereInput
-  cut_is_null: Boolean
-  user: UserWhereInput
-  user_is_null: Boolean
-}
-
-input CartItemWhereUniqueInput {
-  id: ID
-}
-
-enum SortCartItemsBy {
-  id_ASC
-  id_DESC
-  quantity_ASC
-  quantity_DESC
-}
-
-input CartItemOrderByInput {
-  id: OrderDirection
-  quantity: OrderDirection
-}
-
-input CartItemUpdateInput {
-  quantity: Int
-  cut: CutRelateToOneInput
-  user: UserRelateToOneInput
-}
-
-input UserRelateToOneInput {
-  create: UserCreateInput
-  connect: UserWhereUniqueInput
-  disconnect: UserWhereUniqueInput
-  disconnectAll: Boolean
-}
-
-input CartItemsUpdateInput {
-  id: ID!
-  data: CartItemUpdateInput
-}
-
-input CartItemCreateInput {
-  quantity: Int
-  cut: CutRelateToOneInput
-  user: UserRelateToOneInput
-}
-
-input CartItemsCreateInput {
-  data: CartItemCreateInput
-}
-
-"""
- A keystone list
-"""
-type OrderItem {
-  id: ID!
-  name: String
-  description: String
-  photo: CutImage
-  price: Int
-  quantity: Int
-  order: Order
-}
-
-input OrderItemWhereInput {
-  AND: [OrderItemWhereInput!]
-  OR: [OrderItemWhereInput!]
-  id: ID
-  id_not: ID
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_in: [ID]
-  id_not_in: [ID]
-  name: String
-  name_not: String
-  name_contains: String
-  name_not_contains: String
-  name_starts_with: String
-  name_not_starts_with: String
-  name_ends_with: String
-  name_not_ends_with: String
-  name_i: String
-  name_not_i: String
-  name_contains_i: String
-  name_not_contains_i: String
-  name_starts_with_i: String
-  name_not_starts_with_i: String
-  name_ends_with_i: String
-  name_not_ends_with_i: String
-  name_in: [String]
-  name_not_in: [String]
-  description: String
-  description_not: String
-  description_contains: String
-  description_not_contains: String
-  description_starts_with: String
-  description_not_starts_with: String
-  description_ends_with: String
-  description_not_ends_with: String
-  description_i: String
-  description_not_i: String
-  description_contains_i: String
-  description_not_contains_i: String
-  description_starts_with_i: String
-  description_not_starts_with_i: String
-  description_ends_with_i: String
-  description_not_ends_with_i: String
-  description_in: [String]
-  description_not_in: [String]
-  photo: CutImageWhereInput
-  photo_is_null: Boolean
-  price: Int
-  price_not: Int
-  price_lt: Int
-  price_lte: Int
-  price_gt: Int
-  price_gte: Int
-  price_in: [Int]
-  price_not_in: [Int]
-  quantity: Int
-  quantity_not: Int
-  quantity_lt: Int
-  quantity_lte: Int
-  quantity_gt: Int
-  quantity_gte: Int
-  quantity_in: [Int]
-  quantity_not_in: [Int]
-  order: OrderWhereInput
-  order_is_null: Boolean
-}
-
-input OrderItemWhereUniqueInput {
-  id: ID
-}
-
-enum SortOrderItemsBy {
-  id_ASC
-  id_DESC
-  name_ASC
-  name_DESC
-  description_ASC
-  description_DESC
-  price_ASC
-  price_DESC
-  quantity_ASC
-  quantity_DESC
-}
-
-input OrderItemOrderByInput {
-  id: OrderDirection
-  name: OrderDirection
-  description: OrderDirection
-  price: OrderDirection
-  quantity: OrderDirection
-}
-
-input OrderItemUpdateInput {
-  name: String
-  description: String
-  photo: CutImageRelateToOneInput
-  price: Int
-  quantity: Int
-  order: OrderRelateToOneInput
-}
-
-input OrderRelateToOneInput {
-  create: OrderCreateInput
-  connect: OrderWhereUniqueInput
-  disconnect: OrderWhereUniqueInput
-  disconnectAll: Boolean
-}
-
-input OrderItemsUpdateInput {
-  id: ID!
-  data: OrderItemUpdateInput
-}
-
-input OrderItemCreateInput {
-  name: String
-  description: String
-  photo: CutImageRelateToOneInput
-  price: Int
-  quantity: Int
-  order: OrderRelateToOneInput
-}
-
-input OrderItemsCreateInput {
-  data: OrderItemCreateInput
-}
-
-"""
- A keystone list
-"""
-type Order {
-  id: ID!
-  label: String
-  total: Int
-  items(
-    where: OrderItemWhereInput! = {}
-    search: String
-    sortBy: [SortOrderItemsBy!]
-      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
-    orderBy: [OrderItemOrderByInput!]! = []
-    first: Int
-    skip: Int! = 0
-  ): [OrderItem!]
-  _itemsMeta(
-    where: OrderItemWhereInput! = {}
-    search: String
-    sortBy: [SortOrderItemsBy!]
-      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
-    orderBy: [OrderItemOrderByInput!]! = []
-    first: Int
-    skip: Int! = 0
-  ): _QueryMeta
-    @deprecated(
-      reason: "This query will be removed in a future version. Please use itemsCount instead."
-    )
-  itemsCount(where: OrderItemWhereInput! = {}): Int
-  user: User
-  charge: String
-  created: String
-}
-
-input OrderWhereInput {
-  AND: [OrderWhereInput!]
-  OR: [OrderWhereInput!]
-  id: ID
-  id_not: ID
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_in: [ID]
-  id_not_in: [ID]
-  total: Int
-  total_not: Int
-  total_lt: Int
-  total_lte: Int
-  total_gt: Int
-  total_gte: Int
-  total_in: [Int]
-  total_not_in: [Int]
-
-  """
-   condition must be true for all nodes
-  """
-  items_every: OrderItemWhereInput
-
-  """
-   condition must be true for at least 1 node
-  """
-  items_some: OrderItemWhereInput
-
-  """
-   condition must be false for all nodes
-  """
-  items_none: OrderItemWhereInput
-  user: UserWhereInput
-  user_is_null: Boolean
-  charge: String
-  charge_not: String
-  charge_contains: String
-  charge_not_contains: String
-  charge_starts_with: String
-  charge_not_starts_with: String
-  charge_ends_with: String
-  charge_not_ends_with: String
-  charge_i: String
-  charge_not_i: String
-  charge_contains_i: String
-  charge_not_contains_i: String
-  charge_starts_with_i: String
-  charge_not_starts_with_i: String
-  charge_ends_with_i: String
-  charge_not_ends_with_i: String
-  charge_in: [String]
-  charge_not_in: [String]
-  created: String
-  created_not: String
-  created_lt: String
-  created_lte: String
-  created_gt: String
-  created_gte: String
-  created_in: [String]
-  created_not_in: [String]
-}
-
-input OrderWhereUniqueInput {
-  id: ID
-}
-
-enum SortOrdersBy {
-  id_ASC
-  id_DESC
-  total_ASC
-  total_DESC
-  charge_ASC
-  charge_DESC
-  created_ASC
-  created_DESC
-}
-
-input OrderOrderByInput {
-  id: OrderDirection
-  total: OrderDirection
-  charge: OrderDirection
-  created: OrderDirection
-}
-
-input OrderUpdateInput {
-  total: Int
-  items: OrderItemRelateToManyInput
-  user: UserRelateToOneInput
-  charge: String
-  created: String
-}
-
-input OrderItemRelateToManyInput {
-  create: [OrderItemCreateInput]
-  connect: [OrderItemWhereUniqueInput]
-  disconnect: [OrderItemWhereUniqueInput]
-  disconnectAll: Boolean
-}
-
-input OrdersUpdateInput {
-  id: ID!
-  data: OrderUpdateInput
-}
-
-input OrderCreateInput {
-  total: Int
-  items: OrderItemRelateToManyInput
-  user: UserRelateToOneInput
-  charge: String
-  created: String
-}
-
-input OrdersCreateInput {
-  data: OrderCreateInput
-}
-
-"""
- A keystone list
-"""
 type Address {
   id: ID!
+  user: User
   street: String
   city: String
   state: String
   zip: String
-  user: User
+  createdAt: String
 }
 
 input AddressWhereInput {
@@ -1004,6 +22,8 @@ input AddressWhereInput {
   id_gte: ID
   id_in: [ID]
   id_not_in: [ID]
+  user: UserWhereInput
+  user_is_null: Boolean
   street: String
   street_not: String
   street_contains: String
@@ -1076,8 +96,14 @@ input AddressWhereInput {
   zip_not_ends_with_i: String
   zip_in: [String]
   zip_not_in: [String]
-  user: UserWhereInput
-  user_is_null: Boolean
+  createdAt: String
+  createdAt_not: String
+  createdAt_lt: String
+  createdAt_lte: String
+  createdAt_gt: String
+  createdAt_gte: String
+  createdAt_in: [String]
+  createdAt_not_in: [String]
 }
 
 input AddressWhereUniqueInput {
@@ -1095,6 +121,8 @@ enum SortAddressesBy {
   state_DESC
   zip_ASC
   zip_DESC
+  createdAt_ASC
+  createdAt_DESC
 }
 
 input AddressOrderByInput {
@@ -1103,14 +131,28 @@ input AddressOrderByInput {
   city: OrderDirection
   state: OrderDirection
   zip: OrderDirection
+  createdAt: OrderDirection
+}
+
+enum OrderDirection {
+  asc
+  desc
 }
 
 input AddressUpdateInput {
+  user: UserRelateToOneInput
   street: String
   city: String
   state: String
   zip: String
-  user: UserRelateToOneInput
+  createdAt: String
+}
+
+input UserRelateToOneInput {
+  create: UserCreateInput
+  connect: UserWhereUniqueInput
+  disconnect: UserWhereUniqueInput
+  disconnectAll: Boolean
 }
 
 input AddressesUpdateInput {
@@ -1119,11 +161,12 @@ input AddressesUpdateInput {
 }
 
 input AddressCreateInput {
+  user: UserRelateToOneInput
   street: String
   city: String
   state: String
   zip: String
-  user: UserRelateToOneInput
+  createdAt: String
 }
 
 input AddressesCreateInput {
@@ -1133,40 +176,49 @@ input AddressesCreateInput {
 """
  A keystone list
 """
-type Farm {
+type Animal {
   id: ID!
-  name: String
-  description: String
-  city: String
-  state: String
-  dateCreated: String
-  animals(
-    where: AnimalWhereInput! = {}
+  farm: Farm
+  cuts(
+    where: CutWhereInput! = {}
     search: String
-    sortBy: [SortAnimalsBy!]
+    sortBy: [SortCutsBy!]
       @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
-    orderBy: [AnimalOrderByInput!]! = []
+    orderBy: [CutOrderByInput!]! = []
     first: Int
     skip: Int! = 0
-  ): [Animal!]
-  _animalsMeta(
-    where: AnimalWhereInput! = {}
+  ): [Cut!]
+  _cutsMeta(
+    where: CutWhereInput! = {}
     search: String
-    sortBy: [SortAnimalsBy!]
+    sortBy: [SortCutsBy!]
       @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
-    orderBy: [AnimalOrderByInput!]! = []
+    orderBy: [CutOrderByInput!]! = []
     first: Int
     skip: Int! = 0
   ): _QueryMeta
     @deprecated(
-      reason: "This query will be removed in a future version. Please use animalsCount instead."
+      reason: "This query will be removed in a future version. Please use cutsCount instead."
     )
-  animalsCount(where: AnimalWhereInput! = {}): Int
+  cutsCount(where: CutWhereInput! = {}): Int
+  breed: Breed
+  description: String
+  hangWeight: Int
+  processedWeight: Int
+  sellableWeight: Int
+  wasteWeight: Int
+  createdAt: String
+  processedAt: String
+  availableAt: String
 }
 
-input FarmWhereInput {
-  AND: [FarmWhereInput!]
-  OR: [FarmWhereInput!]
+type _QueryMeta {
+  count: Int
+}
+
+input AnimalWhereInput {
+  AND: [AnimalWhereInput!]
+  OR: [AnimalWhereInput!]
   id: ID
   id_not: ID
   id_lt: ID
@@ -1175,6 +227,426 @@ input FarmWhereInput {
   id_gte: ID
   id_in: [ID]
   id_not_in: [ID]
+  farm: FarmWhereInput
+  farm_is_null: Boolean
+
+  """
+   condition must be true for all nodes
+  """
+  cuts_every: CutWhereInput
+
+  """
+   condition must be true for at least 1 node
+  """
+  cuts_some: CutWhereInput
+
+  """
+   condition must be false for all nodes
+  """
+  cuts_none: CutWhereInput
+  breed: BreedWhereInput
+  breed_is_null: Boolean
+  description: String
+  description_not: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  description_i: String
+  description_not_i: String
+  description_contains_i: String
+  description_not_contains_i: String
+  description_starts_with_i: String
+  description_not_starts_with_i: String
+  description_ends_with_i: String
+  description_not_ends_with_i: String
+  description_in: [String]
+  description_not_in: [String]
+  hangWeight: Int
+  hangWeight_not: Int
+  hangWeight_lt: Int
+  hangWeight_lte: Int
+  hangWeight_gt: Int
+  hangWeight_gte: Int
+  hangWeight_in: [Int]
+  hangWeight_not_in: [Int]
+  processedWeight: Int
+  processedWeight_not: Int
+  processedWeight_lt: Int
+  processedWeight_lte: Int
+  processedWeight_gt: Int
+  processedWeight_gte: Int
+  processedWeight_in: [Int]
+  processedWeight_not_in: [Int]
+  sellableWeight: Int
+  sellableWeight_not: Int
+  sellableWeight_lt: Int
+  sellableWeight_lte: Int
+  sellableWeight_gt: Int
+  sellableWeight_gte: Int
+  sellableWeight_in: [Int]
+  sellableWeight_not_in: [Int]
+  wasteWeight: Int
+  wasteWeight_not: Int
+  wasteWeight_lt: Int
+  wasteWeight_lte: Int
+  wasteWeight_gt: Int
+  wasteWeight_gte: Int
+  wasteWeight_in: [Int]
+  wasteWeight_not_in: [Int]
+  createdAt: String
+  createdAt_not: String
+  createdAt_lt: String
+  createdAt_lte: String
+  createdAt_gt: String
+  createdAt_gte: String
+  createdAt_in: [String]
+  createdAt_not_in: [String]
+  processedAt: String
+  processedAt_not: String
+  processedAt_lt: String
+  processedAt_lte: String
+  processedAt_gt: String
+  processedAt_gte: String
+  processedAt_in: [String]
+  processedAt_not_in: [String]
+  availableAt: String
+  availableAt_not: String
+  availableAt_lt: String
+  availableAt_lte: String
+  availableAt_gt: String
+  availableAt_gte: String
+  availableAt_in: [String]
+  availableAt_not_in: [String]
+}
+
+input AnimalWhereUniqueInput {
+  id: ID
+}
+
+enum SortAnimalsBy {
+  id_ASC
+  id_DESC
+  description_ASC
+  description_DESC
+  hangWeight_ASC
+  hangWeight_DESC
+  processedWeight_ASC
+  processedWeight_DESC
+  sellableWeight_ASC
+  sellableWeight_DESC
+  wasteWeight_ASC
+  wasteWeight_DESC
+  createdAt_ASC
+  createdAt_DESC
+  processedAt_ASC
+  processedAt_DESC
+  availableAt_ASC
+  availableAt_DESC
+}
+
+input AnimalOrderByInput {
+  id: OrderDirection
+  description: OrderDirection
+  hangWeight: OrderDirection
+  processedWeight: OrderDirection
+  sellableWeight: OrderDirection
+  wasteWeight: OrderDirection
+  createdAt: OrderDirection
+  processedAt: OrderDirection
+  availableAt: OrderDirection
+}
+
+input AnimalUpdateInput {
+  farm: FarmRelateToOneInput
+  cuts: CutRelateToManyInput
+  breed: BreedRelateToOneInput
+  description: String
+  hangWeight: Int
+  processedWeight: Int
+  sellableWeight: Int
+  wasteWeight: Int
+  createdAt: String
+  processedAt: String
+  availableAt: String
+}
+
+input FarmRelateToOneInput {
+  create: FarmCreateInput
+  connect: FarmWhereUniqueInput
+  disconnect: FarmWhereUniqueInput
+  disconnectAll: Boolean
+}
+
+input CutRelateToManyInput {
+  create: [CutCreateInput]
+  connect: [CutWhereUniqueInput]
+  disconnect: [CutWhereUniqueInput]
+  disconnectAll: Boolean
+}
+
+input BreedRelateToOneInput {
+  create: BreedCreateInput
+  connect: BreedWhereUniqueInput
+  disconnect: BreedWhereUniqueInput
+  disconnectAll: Boolean
+}
+
+input AnimalsUpdateInput {
+  id: ID!
+  data: AnimalUpdateInput
+}
+
+input AnimalCreateInput {
+  farm: FarmRelateToOneInput
+  cuts: CutRelateToManyInput
+  breed: BreedRelateToOneInput
+  description: String
+  hangWeight: Int
+  processedWeight: Int
+  sellableWeight: Int
+  wasteWeight: Int
+  createdAt: String
+  processedAt: String
+  availableAt: String
+}
+
+input AnimalsCreateInput {
+  data: AnimalCreateInput
+}
+
+"""
+ A keystone list
+"""
+type Breed {
+  id: ID!
+  animal: Animal
+  name: String
+  bred: String
+}
+
+input BreedWhereInput {
+  AND: [BreedWhereInput!]
+  OR: [BreedWhereInput!]
+  id: ID
+  id_not: ID
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID]
+  id_not_in: [ID]
+  animal: AnimalWhereInput
+  animal_is_null: Boolean
+  name: String
+  name_not: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  name_i: String
+  name_not_i: String
+  name_contains_i: String
+  name_not_contains_i: String
+  name_starts_with_i: String
+  name_not_starts_with_i: String
+  name_ends_with_i: String
+  name_not_ends_with_i: String
+  name_in: [String]
+  name_not_in: [String]
+  bred: String
+  bred_not: String
+  bred_contains: String
+  bred_not_contains: String
+  bred_starts_with: String
+  bred_not_starts_with: String
+  bred_ends_with: String
+  bred_not_ends_with: String
+  bred_i: String
+  bred_not_i: String
+  bred_contains_i: String
+  bred_not_contains_i: String
+  bred_starts_with_i: String
+  bred_not_starts_with_i: String
+  bred_ends_with_i: String
+  bred_not_ends_with_i: String
+  bred_in: [String]
+  bred_not_in: [String]
+}
+
+input BreedWhereUniqueInput {
+  id: ID
+}
+
+enum SortBreedsBy {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  bred_ASC
+  bred_DESC
+}
+
+input BreedOrderByInput {
+  id: OrderDirection
+  name: OrderDirection
+  bred: OrderDirection
+}
+
+input BreedUpdateInput {
+  animal: AnimalRelateToOneInput
+  name: String
+  bred: String
+}
+
+input AnimalRelateToOneInput {
+  create: AnimalCreateInput
+  connect: AnimalWhereUniqueInput
+  disconnect: AnimalWhereUniqueInput
+  disconnectAll: Boolean
+}
+
+input BreedsUpdateInput {
+  id: ID!
+  data: BreedUpdateInput
+}
+
+input BreedCreateInput {
+  animal: AnimalRelateToOneInput
+  name: String
+  bred: String
+}
+
+input BreedsCreateInput {
+  data: BreedCreateInput
+}
+
+"""
+ A keystone list
+"""
+type CartItem {
+  id: ID!
+  cut: Cut
+  user: User
+  quantity: Int
+  createdAt: String
+}
+
+input CartItemWhereInput {
+  AND: [CartItemWhereInput!]
+  OR: [CartItemWhereInput!]
+  id: ID
+  id_not: ID
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID]
+  id_not_in: [ID]
+  cut: CutWhereInput
+  cut_is_null: Boolean
+  user: UserWhereInput
+  user_is_null: Boolean
+  quantity: Int
+  quantity_not: Int
+  quantity_lt: Int
+  quantity_lte: Int
+  quantity_gt: Int
+  quantity_gte: Int
+  quantity_in: [Int]
+  quantity_not_in: [Int]
+  createdAt: String
+  createdAt_not: String
+  createdAt_lt: String
+  createdAt_lte: String
+  createdAt_gt: String
+  createdAt_gte: String
+  createdAt_in: [String]
+  createdAt_not_in: [String]
+}
+
+input CartItemWhereUniqueInput {
+  id: ID
+}
+
+enum SortCartItemsBy {
+  id_ASC
+  id_DESC
+  quantity_ASC
+  quantity_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+input CartItemOrderByInput {
+  id: OrderDirection
+  quantity: OrderDirection
+  createdAt: OrderDirection
+}
+
+input CartItemUpdateInput {
+  cut: CutRelateToOneInput
+  user: UserRelateToOneInput
+  quantity: Int
+  createdAt: String
+}
+
+input CutRelateToOneInput {
+  create: CutCreateInput
+  connect: CutWhereUniqueInput
+  disconnect: CutWhereUniqueInput
+  disconnectAll: Boolean
+}
+
+input CartItemsUpdateInput {
+  id: ID!
+  data: CartItemUpdateInput
+}
+
+input CartItemCreateInput {
+  cut: CutRelateToOneInput
+  user: UserRelateToOneInput
+  quantity: Int
+  createdAt: String
+}
+
+input CartItemsCreateInput {
+  data: CartItemCreateInput
+}
+
+"""
+ A keystone list
+"""
+type Cut {
+  id: ID!
+  animal: Animal
+  photo: CutImage
+  name: String
+  description: String
+  status: String
+  price: Int
+  weight: Int
+}
+
+input CutWhereInput {
+  AND: [CutWhereInput!]
+  OR: [CutWhereInput!]
+  id: ID
+  id_not: ID
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID]
+  id_not_in: [ID]
+  animal: AnimalWhereInput
+  animal_is_null: Boolean
+  photo: CutImageWhereInput
+  photo_is_null: Boolean
   name: String
   name_not: String
   name_contains: String
@@ -1211,50 +683,274 @@ input FarmWhereInput {
   description_not_ends_with_i: String
   description_in: [String]
   description_not_in: [String]
-  city: String
-  city_not: String
-  city_contains: String
-  city_not_contains: String
-  city_starts_with: String
-  city_not_starts_with: String
-  city_ends_with: String
-  city_not_ends_with: String
-  city_i: String
-  city_not_i: String
-  city_contains_i: String
-  city_not_contains_i: String
-  city_starts_with_i: String
-  city_not_starts_with_i: String
-  city_ends_with_i: String
-  city_not_ends_with_i: String
-  city_in: [String]
-  city_not_in: [String]
-  state: String
-  state_not: String
-  state_contains: String
-  state_not_contains: String
-  state_starts_with: String
-  state_not_starts_with: String
-  state_ends_with: String
-  state_not_ends_with: String
-  state_i: String
-  state_not_i: String
-  state_contains_i: String
-  state_not_contains_i: String
-  state_starts_with_i: String
-  state_not_starts_with_i: String
-  state_ends_with_i: String
-  state_not_ends_with_i: String
-  state_in: [String]
-  state_not_in: [String]
-  dateCreated: String
-  dateCreated_not: String
-  dateCreated_lt: String
-  dateCreated_lte: String
-  dateCreated_gt: String
-  dateCreated_gte: String
-  dateCreated_in: [String]
-  dateCreated_not_in: [String]
+  status: String
+  status_not: String
+  status_in: [String]
+  status_not_in: [String]
+  price: Int
+  price_not: Int
+  price_lt: Int
+  price_lte: Int
+  price_gt: Int
+  price_gte: Int
+  price_in: [Int]
+  price_not_in: [Int]
+  weight: Int
+  weight_not: Int
+  weight_lt: Int
+  weight_lte: Int
+  weight_gt: Int
+  weight_gte: Int
+  weight_in: [Int]
+  weight_not_in: [Int]
+}
+
+input CutWhereUniqueInput {
+  id: ID
+}
+
+enum SortCutsBy {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  description_ASC
+  description_DESC
+  status_ASC
+  status_DESC
+  price_ASC
+  price_DESC
+  weight_ASC
+  weight_DESC
+}
+
+input CutOrderByInput {
+  id: OrderDirection
+  name: OrderDirection
+  description: OrderDirection
+  status: OrderDirection
+  price: OrderDirection
+  weight: OrderDirection
+}
+
+input CutUpdateInput {
+  animal: AnimalRelateToOneInput
+  photo: CutImageRelateToOneInput
+  name: String
+  description: String
+  status: String
+  price: Int
+  weight: Int
+}
+
+input CutImageRelateToOneInput {
+  create: CutImageCreateInput
+  connect: CutImageWhereUniqueInput
+  disconnect: CutImageWhereUniqueInput
+  disconnectAll: Boolean
+}
+
+input CutsUpdateInput {
+  id: ID!
+  data: CutUpdateInput
+}
+
+input CutCreateInput {
+  animal: AnimalRelateToOneInput
+  photo: CutImageRelateToOneInput
+  name: String
+  description: String
+  status: String
+  price: Int
+  weight: Int
+}
+
+input CutsCreateInput {
+  data: CutCreateInput
+}
+
+"""
+ A keystone list
+"""
+type CutImage {
+  id: ID!
+  cut: Cut
+  image: CloudinaryImage_File
+  altText: String
+}
+
+type CloudinaryImage_File {
+  id: ID
+  filename: String
+  originalFilename: String
+  mimetype: String
+  encoding: String
+  publicUrl: String
+  publicUrlTransformed(transformation: CloudinaryImageFormat): String
+}
+
+"""
+Mirrors the formatting options [Cloudinary provides](https://cloudinary.com/documentation/image_transformation_reference).
+All options are strings as they ultimately end up in a URL.
+"""
+input CloudinaryImageFormat {
+  """
+   Rewrites the filename to be this pretty string. Do not include `/` or `.`
+  """
+  prettyName: String
+  width: String
+  height: String
+  crop: String
+  aspect_ratio: String
+  gravity: String
+  zoom: String
+  x: String
+  y: String
+  format: String
+  fetch_format: String
+  quality: String
+  radius: String
+  angle: String
+  effect: String
+  opacity: String
+  border: String
+  background: String
+  overlay: String
+  underlay: String
+  default_image: String
+  delay: String
+  color: String
+  color_space: String
+  dpr: String
+  page: String
+  density: String
+  flags: String
+  transformation: String
+}
+
+input CutImageWhereInput {
+  AND: [CutImageWhereInput!]
+  OR: [CutImageWhereInput!]
+  id: ID
+  id_not: ID
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID]
+  id_not_in: [ID]
+  cut: CutWhereInput
+  cut_is_null: Boolean
+  image: String
+  image_not: String
+  image_in: [String]
+  image_not_in: [String]
+  altText: String
+  altText_not: String
+  altText_contains: String
+  altText_not_contains: String
+  altText_starts_with: String
+  altText_not_starts_with: String
+  altText_ends_with: String
+  altText_not_ends_with: String
+  altText_i: String
+  altText_not_i: String
+  altText_contains_i: String
+  altText_not_contains_i: String
+  altText_starts_with_i: String
+  altText_not_starts_with_i: String
+  altText_ends_with_i: String
+  altText_not_ends_with_i: String
+  altText_in: [String]
+  altText_not_in: [String]
+}
+
+input CutImageWhereUniqueInput {
+  id: ID
+}
+
+enum SortCutImagesBy {
+  id_ASC
+  id_DESC
+  altText_ASC
+  altText_DESC
+}
+
+input CutImageOrderByInput {
+  id: OrderDirection
+  altText: OrderDirection
+}
+
+input CutImageUpdateInput {
+  cut: CutRelateToOneInput
+  image: Upload
+  altText: String
+}
+
+"""
+The `Upload` scalar type represents a file upload.
+"""
+scalar Upload
+
+input CutImagesUpdateInput {
+  id: ID!
+  data: CutImageUpdateInput
+}
+
+input CutImageCreateInput {
+  cut: CutRelateToOneInput
+  image: Upload
+  altText: String
+}
+
+input CutImagesCreateInput {
+  data: CutImageCreateInput
+}
+
+"""
+ A keystone list
+"""
+type Farm {
+  id: ID!
+  animals(
+    where: AnimalWhereInput! = {}
+    search: String
+    sortBy: [SortAnimalsBy!]
+      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
+    orderBy: [AnimalOrderByInput!]! = []
+    first: Int
+    skip: Int! = 0
+  ): [Animal!]
+  _animalsMeta(
+    where: AnimalWhereInput! = {}
+    search: String
+    sortBy: [SortAnimalsBy!]
+      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
+    orderBy: [AnimalOrderByInput!]! = []
+    first: Int
+    skip: Int! = 0
+  ): _QueryMeta
+    @deprecated(
+      reason: "This query will be removed in a future version. Please use animalsCount instead."
+    )
+  animalsCount(where: AnimalWhereInput! = {}): Int
+  name: String
+  location: String
+  description: String
+  createdAt: String
+}
+
+input FarmWhereInput {
+  AND: [FarmWhereInput!]
+  OR: [FarmWhereInput!]
+  id: ID
+  id_not: ID
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID]
+  id_not_in: [ID]
 
   """
    condition must be true for all nodes
@@ -1270,118 +966,42 @@ input FarmWhereInput {
    condition must be false for all nodes
   """
   animals_none: AnimalWhereInput
-}
-
-input FarmWhereUniqueInput {
-  id: ID
-}
-
-enum SortFarmsBy {
-  id_ASC
-  id_DESC
-  name_ASC
-  name_DESC
-  description_ASC
-  description_DESC
-  city_ASC
-  city_DESC
-  state_ASC
-  state_DESC
-  dateCreated_ASC
-  dateCreated_DESC
-}
-
-input FarmOrderByInput {
-  id: OrderDirection
-  name: OrderDirection
-  description: OrderDirection
-  city: OrderDirection
-  state: OrderDirection
-  dateCreated: OrderDirection
-}
-
-input FarmUpdateInput {
   name: String
-  description: String
-  city: String
-  state: String
-  dateCreated: String
-  animals: AnimalRelateToManyInput
-}
-
-input AnimalRelateToManyInput {
-  create: [AnimalCreateInput]
-  connect: [AnimalWhereUniqueInput]
-  disconnect: [AnimalWhereUniqueInput]
-  disconnectAll: Boolean
-}
-
-input FarmsUpdateInput {
-  id: ID!
-  data: FarmUpdateInput
-}
-
-input FarmCreateInput {
-  name: String
-  description: String
-  city: String
-  state: String
-  dateCreated: String
-  animals: AnimalRelateToManyInput
-}
-
-input FarmsCreateInput {
-  data: FarmCreateInput
-}
-
-"""
- A keystone list
-"""
-type Animal {
-  id: ID!
-  type: String
-  description: String
-  dateCreated: String
-  farm: Farm
-  cuts(
-    where: CutWhereInput! = {}
-    search: String
-    sortBy: [SortCutsBy!]
-      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
-    orderBy: [CutOrderByInput!]! = []
-    first: Int
-    skip: Int! = 0
-  ): [Cut!]
-  _cutsMeta(
-    where: CutWhereInput! = {}
-    search: String
-    sortBy: [SortCutsBy!]
-      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
-    orderBy: [CutOrderByInput!]! = []
-    first: Int
-    skip: Int! = 0
-  ): _QueryMeta
-    @deprecated(
-      reason: "This query will be removed in a future version. Please use cutsCount instead."
-    )
-  cutsCount(where: CutWhereInput! = {}): Int
-}
-
-input AnimalWhereInput {
-  AND: [AnimalWhereInput!]
-  OR: [AnimalWhereInput!]
-  id: ID
-  id_not: ID
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_in: [ID]
-  id_not_in: [ID]
-  type: String
-  type_not: String
-  type_in: [String]
-  type_not_in: [String]
+  name_not: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  name_i: String
+  name_not_i: String
+  name_contains_i: String
+  name_not_contains_i: String
+  name_starts_with_i: String
+  name_not_starts_with_i: String
+  name_ends_with_i: String
+  name_not_ends_with_i: String
+  name_in: [String]
+  name_not_in: [String]
+  location: String
+  location_not: String
+  location_contains: String
+  location_not_contains: String
+  location_starts_with: String
+  location_not_starts_with: String
+  location_ends_with: String
+  location_not_ends_with: String
+  location_i: String
+  location_not_i: String
+  location_contains_i: String
+  location_not_contains_i: String
+  location_starts_with_i: String
+  location_not_starts_with_i: String
+  location_ends_with_i: String
+  location_not_ends_with_i: String
+  location_in: [String]
+  location_not_in: [String]
   description: String
   description_not: String
   description_contains: String
@@ -1400,92 +1020,879 @@ input AnimalWhereInput {
   description_not_ends_with_i: String
   description_in: [String]
   description_not_in: [String]
-  dateCreated: String
-  dateCreated_not: String
-  dateCreated_lt: String
-  dateCreated_lte: String
-  dateCreated_gt: String
-  dateCreated_gte: String
-  dateCreated_in: [String]
-  dateCreated_not_in: [String]
-  farm: FarmWhereInput
-  farm_is_null: Boolean
+  createdAt: String
+  createdAt_not: String
+  createdAt_lt: String
+  createdAt_lte: String
+  createdAt_gt: String
+  createdAt_gte: String
+  createdAt_in: [String]
+  createdAt_not_in: [String]
+}
+
+input FarmWhereUniqueInput {
+  id: ID
+}
+
+enum SortFarmsBy {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  location_ASC
+  location_DESC
+  description_ASC
+  description_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+input FarmOrderByInput {
+  id: OrderDirection
+  name: OrderDirection
+  location: OrderDirection
+  description: OrderDirection
+  createdAt: OrderDirection
+}
+
+input FarmUpdateInput {
+  animals: AnimalRelateToManyInput
+  name: String
+  location: String
+  description: String
+  createdAt: String
+}
+
+input AnimalRelateToManyInput {
+  create: [AnimalCreateInput]
+  connect: [AnimalWhereUniqueInput]
+  disconnect: [AnimalWhereUniqueInput]
+  disconnectAll: Boolean
+}
+
+input FarmsUpdateInput {
+  id: ID!
+  data: FarmUpdateInput
+}
+
+input FarmCreateInput {
+  animals: AnimalRelateToManyInput
+  name: String
+  location: String
+  description: String
+  createdAt: String
+}
+
+input FarmsCreateInput {
+  data: FarmCreateInput
+}
+
+"""
+ A keystone list
+"""
+type Order {
+  id: ID!
+  items(
+    where: OrderItemWhereInput! = {}
+    search: String
+    sortBy: [SortOrderItemsBy!]
+      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
+    orderBy: [OrderItemOrderByInput!]! = []
+    first: Int
+    skip: Int! = 0
+  ): [OrderItem!]
+  _itemsMeta(
+    where: OrderItemWhereInput! = {}
+    search: String
+    sortBy: [SortOrderItemsBy!]
+      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
+    orderBy: [OrderItemOrderByInput!]! = []
+    first: Int
+    skip: Int! = 0
+  ): _QueryMeta
+    @deprecated(
+      reason: "This query will be removed in a future version. Please use itemsCount instead."
+    )
+  itemsCount(where: OrderItemWhereInput! = {}): Int
+  user: User
+  total: Int
+  charge: String
+  createdAt: String
+  confirmedAt: String
+  filledAt: String
+  shippedAt: String
+  deliveredAt: String
+}
+
+input OrderWhereInput {
+  AND: [OrderWhereInput!]
+  OR: [OrderWhereInput!]
+  id: ID
+  id_not: ID
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID]
+  id_not_in: [ID]
 
   """
    condition must be true for all nodes
   """
-  cuts_every: CutWhereInput
+  items_every: OrderItemWhereInput
 
   """
    condition must be true for at least 1 node
   """
-  cuts_some: CutWhereInput
+  items_some: OrderItemWhereInput
 
   """
    condition must be false for all nodes
   """
-  cuts_none: CutWhereInput
+  items_none: OrderItemWhereInput
+  user: UserWhereInput
+  user_is_null: Boolean
+  total: Int
+  total_not: Int
+  total_lt: Int
+  total_lte: Int
+  total_gt: Int
+  total_gte: Int
+  total_in: [Int]
+  total_not_in: [Int]
+  charge: String
+  charge_not: String
+  charge_contains: String
+  charge_not_contains: String
+  charge_starts_with: String
+  charge_not_starts_with: String
+  charge_ends_with: String
+  charge_not_ends_with: String
+  charge_i: String
+  charge_not_i: String
+  charge_contains_i: String
+  charge_not_contains_i: String
+  charge_starts_with_i: String
+  charge_not_starts_with_i: String
+  charge_ends_with_i: String
+  charge_not_ends_with_i: String
+  charge_in: [String]
+  charge_not_in: [String]
+  createdAt: String
+  createdAt_not: String
+  createdAt_lt: String
+  createdAt_lte: String
+  createdAt_gt: String
+  createdAt_gte: String
+  createdAt_in: [String]
+  createdAt_not_in: [String]
+  confirmedAt: String
+  confirmedAt_not: String
+  confirmedAt_lt: String
+  confirmedAt_lte: String
+  confirmedAt_gt: String
+  confirmedAt_gte: String
+  confirmedAt_in: [String]
+  confirmedAt_not_in: [String]
+  filledAt: String
+  filledAt_not: String
+  filledAt_lt: String
+  filledAt_lte: String
+  filledAt_gt: String
+  filledAt_gte: String
+  filledAt_in: [String]
+  filledAt_not_in: [String]
+  shippedAt: String
+  shippedAt_not: String
+  shippedAt_lt: String
+  shippedAt_lte: String
+  shippedAt_gt: String
+  shippedAt_gte: String
+  shippedAt_in: [String]
+  shippedAt_not_in: [String]
+  deliveredAt: String
+  deliveredAt_not: String
+  deliveredAt_lt: String
+  deliveredAt_lte: String
+  deliveredAt_gt: String
+  deliveredAt_gte: String
+  deliveredAt_in: [String]
+  deliveredAt_not_in: [String]
 }
 
-input AnimalWhereUniqueInput {
+input OrderWhereUniqueInput {
   id: ID
 }
 
-enum SortAnimalsBy {
+enum SortOrdersBy {
   id_ASC
   id_DESC
-  type_ASC
-  type_DESC
+  total_ASC
+  total_DESC
+  charge_ASC
+  charge_DESC
+  createdAt_ASC
+  createdAt_DESC
+  confirmedAt_ASC
+  confirmedAt_DESC
+  filledAt_ASC
+  filledAt_DESC
+  shippedAt_ASC
+  shippedAt_DESC
+  deliveredAt_ASC
+  deliveredAt_DESC
+}
+
+input OrderOrderByInput {
+  id: OrderDirection
+  total: OrderDirection
+  charge: OrderDirection
+  createdAt: OrderDirection
+  confirmedAt: OrderDirection
+  filledAt: OrderDirection
+  shippedAt: OrderDirection
+  deliveredAt: OrderDirection
+}
+
+input OrderUpdateInput {
+  items: OrderItemRelateToManyInput
+  user: UserRelateToOneInput
+  total: Int
+  charge: String
+  createdAt: String
+  confirmedAt: String
+  filledAt: String
+  shippedAt: String
+  deliveredAt: String
+}
+
+input OrderItemRelateToManyInput {
+  create: [OrderItemCreateInput]
+  connect: [OrderItemWhereUniqueInput]
+  disconnect: [OrderItemWhereUniqueInput]
+  disconnectAll: Boolean
+}
+
+input OrdersUpdateInput {
+  id: ID!
+  data: OrderUpdateInput
+}
+
+input OrderCreateInput {
+  items: OrderItemRelateToManyInput
+  user: UserRelateToOneInput
+  total: Int
+  charge: String
+  createdAt: String
+  confirmedAt: String
+  filledAt: String
+  shippedAt: String
+  deliveredAt: String
+}
+
+input OrdersCreateInput {
+  data: OrderCreateInput
+}
+
+"""
+ A keystone list
+"""
+type OrderItem {
+  id: ID!
+  order: Order
+  photo: CutImage
+  name: String
+  price: Int
+  quantity: Int
+  description: String
+  createdAt: String
+}
+
+input OrderItemWhereInput {
+  AND: [OrderItemWhereInput!]
+  OR: [OrderItemWhereInput!]
+  id: ID
+  id_not: ID
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID]
+  id_not_in: [ID]
+  order: OrderWhereInput
+  order_is_null: Boolean
+  photo: CutImageWhereInput
+  photo_is_null: Boolean
+  name: String
+  name_not: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  name_i: String
+  name_not_i: String
+  name_contains_i: String
+  name_not_contains_i: String
+  name_starts_with_i: String
+  name_not_starts_with_i: String
+  name_ends_with_i: String
+  name_not_ends_with_i: String
+  name_in: [String]
+  name_not_in: [String]
+  price: Int
+  price_not: Int
+  price_lt: Int
+  price_lte: Int
+  price_gt: Int
+  price_gte: Int
+  price_in: [Int]
+  price_not_in: [Int]
+  quantity: Int
+  quantity_not: Int
+  quantity_lt: Int
+  quantity_lte: Int
+  quantity_gt: Int
+  quantity_gte: Int
+  quantity_in: [Int]
+  quantity_not_in: [Int]
+  description: String
+  description_not: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  description_i: String
+  description_not_i: String
+  description_contains_i: String
+  description_not_contains_i: String
+  description_starts_with_i: String
+  description_not_starts_with_i: String
+  description_ends_with_i: String
+  description_not_ends_with_i: String
+  description_in: [String]
+  description_not_in: [String]
+  createdAt: String
+  createdAt_not: String
+  createdAt_lt: String
+  createdAt_lte: String
+  createdAt_gt: String
+  createdAt_gte: String
+  createdAt_in: [String]
+  createdAt_not_in: [String]
+}
+
+input OrderItemWhereUniqueInput {
+  id: ID
+}
+
+enum SortOrderItemsBy {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  price_ASC
+  price_DESC
+  quantity_ASC
+  quantity_DESC
   description_ASC
   description_DESC
-  dateCreated_ASC
-  dateCreated_DESC
+  createdAt_ASC
+  createdAt_DESC
 }
 
-input AnimalOrderByInput {
+input OrderItemOrderByInput {
   id: OrderDirection
-  type: OrderDirection
+  name: OrderDirection
+  price: OrderDirection
+  quantity: OrderDirection
   description: OrderDirection
-  dateCreated: OrderDirection
+  createdAt: OrderDirection
 }
 
-input AnimalUpdateInput {
-  type: String
+input OrderItemUpdateInput {
+  order: OrderRelateToOneInput
+  photo: CutImageRelateToOneInput
+  name: String
+  price: Int
+  quantity: Int
   description: String
-  dateCreated: String
-  farm: FarmRelateToOneInput
-  cuts: CutRelateToManyInput
+  createdAt: String
 }
 
-input FarmRelateToOneInput {
-  create: FarmCreateInput
-  connect: FarmWhereUniqueInput
-  disconnect: FarmWhereUniqueInput
+input OrderRelateToOneInput {
+  create: OrderCreateInput
+  connect: OrderWhereUniqueInput
+  disconnect: OrderWhereUniqueInput
   disconnectAll: Boolean
 }
 
-input CutRelateToManyInput {
-  create: [CutCreateInput]
-  connect: [CutWhereUniqueInput]
-  disconnect: [CutWhereUniqueInput]
-  disconnectAll: Boolean
-}
-
-input AnimalsUpdateInput {
+input OrderItemsUpdateInput {
   id: ID!
-  data: AnimalUpdateInput
+  data: OrderItemUpdateInput
 }
 
-input AnimalCreateInput {
-  type: String
+input OrderItemCreateInput {
+  order: OrderRelateToOneInput
+  photo: CutImageRelateToOneInput
+  name: String
+  price: Int
+  quantity: Int
   description: String
-  dateCreated: String
-  farm: FarmRelateToOneInput
-  cuts: CutRelateToManyInput
+  createdAt: String
 }
 
-input AnimalsCreateInput {
-  data: AnimalCreateInput
+input OrderItemsCreateInput {
+  data: OrderItemCreateInput
+}
+
+"""
+ A keystone list
+"""
+type Setting {
+  id: ID!
+  user: User
+  darkmode: String
+  animation: String
+  textsize: String
+}
+
+input SettingWhereInput {
+  AND: [SettingWhereInput!]
+  OR: [SettingWhereInput!]
+  id: ID
+  id_not: ID
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID]
+  id_not_in: [ID]
+  user: UserWhereInput
+  user_is_null: Boolean
+  darkmode: String
+  darkmode_not: String
+  darkmode_in: [String]
+  darkmode_not_in: [String]
+  animation: String
+  animation_not: String
+  animation_in: [String]
+  animation_not_in: [String]
+  textsize: String
+  textsize_not: String
+  textsize_in: [String]
+  textsize_not_in: [String]
+}
+
+input SettingWhereUniqueInput {
+  id: ID
+}
+
+enum SortSettingsBy {
+  id_ASC
+  id_DESC
+  darkmode_ASC
+  darkmode_DESC
+  animation_ASC
+  animation_DESC
+  textsize_ASC
+  textsize_DESC
+}
+
+input SettingOrderByInput {
+  id: OrderDirection
+  darkmode: OrderDirection
+  animation: OrderDirection
+  textsize: OrderDirection
+}
+
+input SettingUpdateInput {
+  user: UserRelateToOneInput
+  darkmode: String
+  animation: String
+  textsize: String
+}
+
+input SettingsUpdateInput {
+  id: ID!
+  data: SettingUpdateInput
+}
+
+input SettingCreateInput {
+  user: UserRelateToOneInput
+  darkmode: String
+  animation: String
+  textsize: String
+}
+
+input SettingsCreateInput {
+  data: SettingCreateInput
+}
+
+"""
+ A keystone list
+"""
+type User {
+  id: ID!
+  orders(
+    where: OrderWhereInput! = {}
+    search: String
+    sortBy: [SortOrdersBy!]
+      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
+    orderBy: [OrderOrderByInput!]! = []
+    first: Int
+    skip: Int! = 0
+  ): [Order!]
+  _ordersMeta(
+    where: OrderWhereInput! = {}
+    search: String
+    sortBy: [SortOrdersBy!]
+      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
+    orderBy: [OrderOrderByInput!]! = []
+    first: Int
+    skip: Int! = 0
+  ): _QueryMeta
+    @deprecated(
+      reason: "This query will be removed in a future version. Please use ordersCount instead."
+    )
+  ordersCount(where: OrderWhereInput! = {}): Int
+  cart(
+    where: CartItemWhereInput! = {}
+    search: String
+    sortBy: [SortCartItemsBy!]
+      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
+    orderBy: [CartItemOrderByInput!]! = []
+    first: Int
+    skip: Int! = 0
+  ): [CartItem!]
+  _cartMeta(
+    where: CartItemWhereInput! = {}
+    search: String
+    sortBy: [SortCartItemsBy!]
+      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
+    orderBy: [CartItemOrderByInput!]! = []
+    first: Int
+    skip: Int! = 0
+  ): _QueryMeta
+    @deprecated(
+      reason: "This query will be removed in a future version. Please use cartCount instead."
+    )
+  cartCount(where: CartItemWhereInput! = {}): Int
+  address(
+    where: AddressWhereInput! = {}
+    search: String
+    sortBy: [SortAddressesBy!]
+      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
+    orderBy: [AddressOrderByInput!]! = []
+    first: Int
+    skip: Int! = 0
+  ): [Address!]
+  _addressMeta(
+    where: AddressWhereInput! = {}
+    search: String
+    sortBy: [SortAddressesBy!]
+      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
+    orderBy: [AddressOrderByInput!]! = []
+    first: Int
+    skip: Int! = 0
+  ): _QueryMeta
+    @deprecated(
+      reason: "This query will be removed in a future version. Please use addressCount instead."
+    )
+  addressCount(where: AddressWhereInput! = {}): Int
+  setting: Setting
+  name: String
+  lastName: String
+  email: String
+  password: PasswordState
+  stripePay: String
+  createdAt: String
+  lastVisitAt: String
+  passwordResetToken: PasswordState
+  passwordResetIssuedAt: String
+  passwordResetRedeemedAt: String
+}
+
+type PasswordState {
+  isSet: Boolean!
+}
+
+input UserWhereInput {
+  AND: [UserWhereInput!]
+  OR: [UserWhereInput!]
+  id: ID
+  id_not: ID
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID]
+  id_not_in: [ID]
+
+  """
+   condition must be true for all nodes
+  """
+  orders_every: OrderWhereInput
+
+  """
+   condition must be true for at least 1 node
+  """
+  orders_some: OrderWhereInput
+
+  """
+   condition must be false for all nodes
+  """
+  orders_none: OrderWhereInput
+
+  """
+   condition must be true for all nodes
+  """
+  cart_every: CartItemWhereInput
+
+  """
+   condition must be true for at least 1 node
+  """
+  cart_some: CartItemWhereInput
+
+  """
+   condition must be false for all nodes
+  """
+  cart_none: CartItemWhereInput
+
+  """
+   condition must be true for all nodes
+  """
+  address_every: AddressWhereInput
+
+  """
+   condition must be true for at least 1 node
+  """
+  address_some: AddressWhereInput
+
+  """
+   condition must be false for all nodes
+  """
+  address_none: AddressWhereInput
+  setting: SettingWhereInput
+  setting_is_null: Boolean
+  name: String
+  name_not: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  name_i: String
+  name_not_i: String
+  name_contains_i: String
+  name_not_contains_i: String
+  name_starts_with_i: String
+  name_not_starts_with_i: String
+  name_ends_with_i: String
+  name_not_ends_with_i: String
+  name_in: [String]
+  name_not_in: [String]
+  lastName: String
+  lastName_not: String
+  lastName_contains: String
+  lastName_not_contains: String
+  lastName_starts_with: String
+  lastName_not_starts_with: String
+  lastName_ends_with: String
+  lastName_not_ends_with: String
+  lastName_i: String
+  lastName_not_i: String
+  lastName_contains_i: String
+  lastName_not_contains_i: String
+  lastName_starts_with_i: String
+  lastName_not_starts_with_i: String
+  lastName_ends_with_i: String
+  lastName_not_ends_with_i: String
+  lastName_in: [String]
+  lastName_not_in: [String]
+  email: String
+  email_not: String
+  email_contains: String
+  email_not_contains: String
+  email_starts_with: String
+  email_not_starts_with: String
+  email_ends_with: String
+  email_not_ends_with: String
+  email_i: String
+  email_not_i: String
+  email_contains_i: String
+  email_not_contains_i: String
+  email_starts_with_i: String
+  email_not_starts_with_i: String
+  email_ends_with_i: String
+  email_not_ends_with_i: String
+  email_in: [String]
+  email_not_in: [String]
+  password_is_set: Boolean
+  stripePay: String
+  stripePay_not: String
+  stripePay_contains: String
+  stripePay_not_contains: String
+  stripePay_starts_with: String
+  stripePay_not_starts_with: String
+  stripePay_ends_with: String
+  stripePay_not_ends_with: String
+  stripePay_i: String
+  stripePay_not_i: String
+  stripePay_contains_i: String
+  stripePay_not_contains_i: String
+  stripePay_starts_with_i: String
+  stripePay_not_starts_with_i: String
+  stripePay_ends_with_i: String
+  stripePay_not_ends_with_i: String
+  stripePay_in: [String]
+  stripePay_not_in: [String]
+  createdAt: String
+  createdAt_not: String
+  createdAt_lt: String
+  createdAt_lte: String
+  createdAt_gt: String
+  createdAt_gte: String
+  createdAt_in: [String]
+  createdAt_not_in: [String]
+  lastVisitAt: String
+  lastVisitAt_not: String
+  lastVisitAt_lt: String
+  lastVisitAt_lte: String
+  lastVisitAt_gt: String
+  lastVisitAt_gte: String
+  lastVisitAt_in: [String]
+  lastVisitAt_not_in: [String]
+  passwordResetToken_is_set: Boolean
+  passwordResetIssuedAt: String
+  passwordResetIssuedAt_not: String
+  passwordResetIssuedAt_lt: String
+  passwordResetIssuedAt_lte: String
+  passwordResetIssuedAt_gt: String
+  passwordResetIssuedAt_gte: String
+  passwordResetIssuedAt_in: [String]
+  passwordResetIssuedAt_not_in: [String]
+  passwordResetRedeemedAt: String
+  passwordResetRedeemedAt_not: String
+  passwordResetRedeemedAt_lt: String
+  passwordResetRedeemedAt_lte: String
+  passwordResetRedeemedAt_gt: String
+  passwordResetRedeemedAt_gte: String
+  passwordResetRedeemedAt_in: [String]
+  passwordResetRedeemedAt_not_in: [String]
+}
+
+input UserWhereUniqueInput {
+  id: ID
+  email: String
+}
+
+enum SortUsersBy {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  lastName_ASC
+  lastName_DESC
+  email_ASC
+  email_DESC
+  stripePay_ASC
+  stripePay_DESC
+  createdAt_ASC
+  createdAt_DESC
+  lastVisitAt_ASC
+  lastVisitAt_DESC
+  passwordResetIssuedAt_ASC
+  passwordResetIssuedAt_DESC
+  passwordResetRedeemedAt_ASC
+  passwordResetRedeemedAt_DESC
+}
+
+input UserOrderByInput {
+  id: OrderDirection
+  name: OrderDirection
+  lastName: OrderDirection
+  email: OrderDirection
+  stripePay: OrderDirection
+  createdAt: OrderDirection
+  lastVisitAt: OrderDirection
+  passwordResetIssuedAt: OrderDirection
+  passwordResetRedeemedAt: OrderDirection
+}
+
+input UserUpdateInput {
+  orders: OrderRelateToManyInput
+  cart: CartItemRelateToManyInput
+  address: AddressRelateToManyInput
+  setting: SettingRelateToOneInput
+  name: String
+  lastName: String
+  email: String
+  password: String
+  stripePay: String
+  createdAt: String
+  lastVisitAt: String
+  passwordResetToken: String
+  passwordResetIssuedAt: String
+  passwordResetRedeemedAt: String
+}
+
+input OrderRelateToManyInput {
+  create: [OrderCreateInput]
+  connect: [OrderWhereUniqueInput]
+  disconnect: [OrderWhereUniqueInput]
+  disconnectAll: Boolean
+}
+
+input CartItemRelateToManyInput {
+  create: [CartItemCreateInput]
+  connect: [CartItemWhereUniqueInput]
+  disconnect: [CartItemWhereUniqueInput]
+  disconnectAll: Boolean
+}
+
+input AddressRelateToManyInput {
+  create: [AddressCreateInput]
+  connect: [AddressWhereUniqueInput]
+  disconnect: [AddressWhereUniqueInput]
+  disconnectAll: Boolean
+}
+
+input SettingRelateToOneInput {
+  create: SettingCreateInput
+  connect: SettingWhereUniqueInput
+  disconnect: SettingWhereUniqueInput
+  disconnectAll: Boolean
+}
+
+input UsersUpdateInput {
+  id: ID!
+  data: UserUpdateInput
+}
+
+input UserCreateInput {
+  orders: OrderRelateToManyInput
+  cart: CartItemRelateToManyInput
+  address: AddressRelateToManyInput
+  setting: SettingRelateToOneInput
+  name: String
+  lastName: String
+  email: String
+  password: String
+  stripePay: String
+  createdAt: String
+  lastVisitAt: String
+  passwordResetToken: String
+  passwordResetIssuedAt: String
+  passwordResetRedeemedAt: String
+}
+
+input UsersCreateInput {
+  data: UserCreateInput
 }
 
 """
@@ -1498,34 +1905,124 @@ scalar JSON
 
 type Mutation {
   """
-   Create a single User item.
+   Create a single Address item.
   """
-  createUser(data: UserCreateInput): User
+  createAddress(data: AddressCreateInput): Address
 
   """
-   Create multiple User items.
+   Create multiple Address items.
   """
-  createUsers(data: [UsersCreateInput]): [User]
+  createAddresses(data: [AddressesCreateInput]): [Address]
 
   """
-   Update a single User item by ID.
+   Update a single Address item by ID.
   """
-  updateUser(id: ID!, data: UserUpdateInput): User
+  updateAddress(id: ID!, data: AddressUpdateInput): Address
 
   """
-   Update multiple User items by ID.
+   Update multiple Address items by ID.
   """
-  updateUsers(data: [UsersUpdateInput]): [User]
+  updateAddresses(data: [AddressesUpdateInput]): [Address]
 
   """
-   Delete a single User item by ID.
+   Delete a single Address item by ID.
   """
-  deleteUser(id: ID!): User
+  deleteAddress(id: ID!): Address
 
   """
-   Delete multiple User items by ID.
+   Delete multiple Address items by ID.
   """
-  deleteUsers(ids: [ID!]): [User]
+  deleteAddresses(ids: [ID!]): [Address]
+
+  """
+   Create a single Animal item.
+  """
+  createAnimal(data: AnimalCreateInput): Animal
+
+  """
+   Create multiple Animal items.
+  """
+  createAnimals(data: [AnimalsCreateInput]): [Animal]
+
+  """
+   Update a single Animal item by ID.
+  """
+  updateAnimal(id: ID!, data: AnimalUpdateInput): Animal
+
+  """
+   Update multiple Animal items by ID.
+  """
+  updateAnimals(data: [AnimalsUpdateInput]): [Animal]
+
+  """
+   Delete a single Animal item by ID.
+  """
+  deleteAnimal(id: ID!): Animal
+
+  """
+   Delete multiple Animal items by ID.
+  """
+  deleteAnimals(ids: [ID!]): [Animal]
+
+  """
+   Create a single Breed item.
+  """
+  createBreed(data: BreedCreateInput): Breed
+
+  """
+   Create multiple Breed items.
+  """
+  createBreeds(data: [BreedsCreateInput]): [Breed]
+
+  """
+   Update a single Breed item by ID.
+  """
+  updateBreed(id: ID!, data: BreedUpdateInput): Breed
+
+  """
+   Update multiple Breed items by ID.
+  """
+  updateBreeds(data: [BreedsUpdateInput]): [Breed]
+
+  """
+   Delete a single Breed item by ID.
+  """
+  deleteBreed(id: ID!): Breed
+
+  """
+   Delete multiple Breed items by ID.
+  """
+  deleteBreeds(ids: [ID!]): [Breed]
+
+  """
+   Create a single CartItem item.
+  """
+  createCartItem(data: CartItemCreateInput): CartItem
+
+  """
+   Create multiple CartItem items.
+  """
+  createCartItems(data: [CartItemsCreateInput]): [CartItem]
+
+  """
+   Update a single CartItem item by ID.
+  """
+  updateCartItem(id: ID!, data: CartItemUpdateInput): CartItem
+
+  """
+   Update multiple CartItem items by ID.
+  """
+  updateCartItems(data: [CartItemsUpdateInput]): [CartItem]
+
+  """
+   Delete a single CartItem item by ID.
+  """
+  deleteCartItem(id: ID!): CartItem
+
+  """
+   Delete multiple CartItem items by ID.
+  """
+  deleteCartItems(ids: [ID!]): [CartItem]
 
   """
    Create a single Cut item.
@@ -1588,64 +2085,34 @@ type Mutation {
   deleteCutImages(ids: [ID!]): [CutImage]
 
   """
-   Create a single CartItem item.
+   Create a single Farm item.
   """
-  createCartItem(data: CartItemCreateInput): CartItem
+  createFarm(data: FarmCreateInput): Farm
 
   """
-   Create multiple CartItem items.
+   Create multiple Farm items.
   """
-  createCartItems(data: [CartItemsCreateInput]): [CartItem]
+  createFarms(data: [FarmsCreateInput]): [Farm]
 
   """
-   Update a single CartItem item by ID.
+   Update a single Farm item by ID.
   """
-  updateCartItem(id: ID!, data: CartItemUpdateInput): CartItem
+  updateFarm(id: ID!, data: FarmUpdateInput): Farm
 
   """
-   Update multiple CartItem items by ID.
+   Update multiple Farm items by ID.
   """
-  updateCartItems(data: [CartItemsUpdateInput]): [CartItem]
+  updateFarms(data: [FarmsUpdateInput]): [Farm]
 
   """
-   Delete a single CartItem item by ID.
+   Delete a single Farm item by ID.
   """
-  deleteCartItem(id: ID!): CartItem
+  deleteFarm(id: ID!): Farm
 
   """
-   Delete multiple CartItem items by ID.
+   Delete multiple Farm items by ID.
   """
-  deleteCartItems(ids: [ID!]): [CartItem]
-
-  """
-   Create a single OrderItem item.
-  """
-  createOrderItem(data: OrderItemCreateInput): OrderItem
-
-  """
-   Create multiple OrderItem items.
-  """
-  createOrderItems(data: [OrderItemsCreateInput]): [OrderItem]
-
-  """
-   Update a single OrderItem item by ID.
-  """
-  updateOrderItem(id: ID!, data: OrderItemUpdateInput): OrderItem
-
-  """
-   Update multiple OrderItem items by ID.
-  """
-  updateOrderItems(data: [OrderItemsUpdateInput]): [OrderItem]
-
-  """
-   Delete a single OrderItem item by ID.
-  """
-  deleteOrderItem(id: ID!): OrderItem
-
-  """
-   Delete multiple OrderItem items by ID.
-  """
-  deleteOrderItems(ids: [ID!]): [OrderItem]
+  deleteFarms(ids: [ID!]): [Farm]
 
   """
    Create a single Order item.
@@ -1678,94 +2145,94 @@ type Mutation {
   deleteOrders(ids: [ID!]): [Order]
 
   """
-   Create a single Address item.
+   Create a single OrderItem item.
   """
-  createAddress(data: AddressCreateInput): Address
+  createOrderItem(data: OrderItemCreateInput): OrderItem
 
   """
-   Create multiple Address items.
+   Create multiple OrderItem items.
   """
-  createAddresses(data: [AddressesCreateInput]): [Address]
+  createOrderItems(data: [OrderItemsCreateInput]): [OrderItem]
 
   """
-   Update a single Address item by ID.
+   Update a single OrderItem item by ID.
   """
-  updateAddress(id: ID!, data: AddressUpdateInput): Address
+  updateOrderItem(id: ID!, data: OrderItemUpdateInput): OrderItem
 
   """
-   Update multiple Address items by ID.
+   Update multiple OrderItem items by ID.
   """
-  updateAddresses(data: [AddressesUpdateInput]): [Address]
+  updateOrderItems(data: [OrderItemsUpdateInput]): [OrderItem]
 
   """
-   Delete a single Address item by ID.
+   Delete a single OrderItem item by ID.
   """
-  deleteAddress(id: ID!): Address
+  deleteOrderItem(id: ID!): OrderItem
 
   """
-   Delete multiple Address items by ID.
+   Delete multiple OrderItem items by ID.
   """
-  deleteAddresses(ids: [ID!]): [Address]
+  deleteOrderItems(ids: [ID!]): [OrderItem]
 
   """
-   Create a single Farm item.
+   Create a single Setting item.
   """
-  createFarm(data: FarmCreateInput): Farm
+  createSetting(data: SettingCreateInput): Setting
 
   """
-   Create multiple Farm items.
+   Create multiple Setting items.
   """
-  createFarms(data: [FarmsCreateInput]): [Farm]
+  createSettings(data: [SettingsCreateInput]): [Setting]
 
   """
-   Update a single Farm item by ID.
+   Update a single Setting item by ID.
   """
-  updateFarm(id: ID!, data: FarmUpdateInput): Farm
+  updateSetting(id: ID!, data: SettingUpdateInput): Setting
 
   """
-   Update multiple Farm items by ID.
+   Update multiple Setting items by ID.
   """
-  updateFarms(data: [FarmsUpdateInput]): [Farm]
+  updateSettings(data: [SettingsUpdateInput]): [Setting]
 
   """
-   Delete a single Farm item by ID.
+   Delete a single Setting item by ID.
   """
-  deleteFarm(id: ID!): Farm
+  deleteSetting(id: ID!): Setting
 
   """
-   Delete multiple Farm items by ID.
+   Delete multiple Setting items by ID.
   """
-  deleteFarms(ids: [ID!]): [Farm]
+  deleteSettings(ids: [ID!]): [Setting]
 
   """
-   Create a single Animal item.
+   Create a single User item.
   """
-  createAnimal(data: AnimalCreateInput): Animal
+  createUser(data: UserCreateInput): User
 
   """
-   Create multiple Animal items.
+   Create multiple User items.
   """
-  createAnimals(data: [AnimalsCreateInput]): [Animal]
+  createUsers(data: [UsersCreateInput]): [User]
 
   """
-   Update a single Animal item by ID.
+   Update a single User item by ID.
   """
-  updateAnimal(id: ID!, data: AnimalUpdateInput): Animal
+  updateUser(id: ID!, data: UserUpdateInput): User
 
   """
-   Update multiple Animal items by ID.
+   Update multiple User items by ID.
   """
-  updateAnimals(data: [AnimalsUpdateInput]): [Animal]
+  updateUsers(data: [UsersUpdateInput]): [User]
 
   """
-   Delete a single Animal item by ID.
+   Delete a single User item by ID.
   """
-  deleteAnimal(id: ID!): Animal
+  deleteUser(id: ID!): User
 
   """
-   Delete multiple Animal items by ID.
+   Delete multiple User items by ID.
   """
-  deleteAnimals(ids: [ID!]): [Animal]
+  deleteUsers(ids: [ID!]): [User]
   authenticateUserWithPassword(
     email: String!
     password: String!
@@ -1846,39 +2313,144 @@ enum PasswordResetRedemptionErrorCode {
 
 type Query {
   """
-   Search for all User items which match the where clause.
+   Search for all Address items which match the where clause.
   """
-  allUsers(
-    where: UserWhereInput! = {}
+  allAddresses(
+    where: AddressWhereInput! = {}
     search: String
-    sortBy: [SortUsersBy!]
+    sortBy: [SortAddressesBy!]
       @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
-    orderBy: [UserOrderByInput!]! = []
+    orderBy: [AddressOrderByInput!]! = []
     first: Int
     skip: Int! = 0
-  ): [User!]
+  ): [Address!]
 
   """
-   Search for the User item with the matching ID.
+   Search for the Address item with the matching ID.
   """
-  User(where: UserWhereUniqueInput!): User
+  Address(where: AddressWhereUniqueInput!): Address
 
   """
-   Perform a meta-query on all User items which match the where clause.
+   Perform a meta-query on all Address items which match the where clause.
   """
-  _allUsersMeta(
-    where: UserWhereInput! = {}
+  _allAddressesMeta(
+    where: AddressWhereInput! = {}
     search: String
-    sortBy: [SortUsersBy!]
+    sortBy: [SortAddressesBy!]
       @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
-    orderBy: [UserOrderByInput!]! = []
+    orderBy: [AddressOrderByInput!]! = []
     first: Int
     skip: Int! = 0
   ): _QueryMeta
     @deprecated(
-      reason: "This query will be removed in a future version. Please use usersCount instead."
+      reason: "This query will be removed in a future version. Please use addressesCount instead."
     )
-  usersCount(where: UserWhereInput! = {}): Int
+  addressesCount(where: AddressWhereInput! = {}): Int
+
+  """
+   Search for all Animal items which match the where clause.
+  """
+  allAnimals(
+    where: AnimalWhereInput! = {}
+    search: String
+    sortBy: [SortAnimalsBy!]
+      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
+    orderBy: [AnimalOrderByInput!]! = []
+    first: Int
+    skip: Int! = 0
+  ): [Animal!]
+
+  """
+   Search for the Animal item with the matching ID.
+  """
+  Animal(where: AnimalWhereUniqueInput!): Animal
+
+  """
+   Perform a meta-query on all Animal items which match the where clause.
+  """
+  _allAnimalsMeta(
+    where: AnimalWhereInput! = {}
+    search: String
+    sortBy: [SortAnimalsBy!]
+      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
+    orderBy: [AnimalOrderByInput!]! = []
+    first: Int
+    skip: Int! = 0
+  ): _QueryMeta
+    @deprecated(
+      reason: "This query will be removed in a future version. Please use animalsCount instead."
+    )
+  animalsCount(where: AnimalWhereInput! = {}): Int
+
+  """
+   Search for all Breed items which match the where clause.
+  """
+  allBreeds(
+    where: BreedWhereInput! = {}
+    search: String
+    sortBy: [SortBreedsBy!]
+      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
+    orderBy: [BreedOrderByInput!]! = []
+    first: Int
+    skip: Int! = 0
+  ): [Breed!]
+
+  """
+   Search for the Breed item with the matching ID.
+  """
+  Breed(where: BreedWhereUniqueInput!): Breed
+
+  """
+   Perform a meta-query on all Breed items which match the where clause.
+  """
+  _allBreedsMeta(
+    where: BreedWhereInput! = {}
+    search: String
+    sortBy: [SortBreedsBy!]
+      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
+    orderBy: [BreedOrderByInput!]! = []
+    first: Int
+    skip: Int! = 0
+  ): _QueryMeta
+    @deprecated(
+      reason: "This query will be removed in a future version. Please use breedsCount instead."
+    )
+  breedsCount(where: BreedWhereInput! = {}): Int
+
+  """
+   Search for all CartItem items which match the where clause.
+  """
+  allCartItems(
+    where: CartItemWhereInput! = {}
+    search: String
+    sortBy: [SortCartItemsBy!]
+      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
+    orderBy: [CartItemOrderByInput!]! = []
+    first: Int
+    skip: Int! = 0
+  ): [CartItem!]
+
+  """
+   Search for the CartItem item with the matching ID.
+  """
+  CartItem(where: CartItemWhereUniqueInput!): CartItem
+
+  """
+   Perform a meta-query on all CartItem items which match the where clause.
+  """
+  _allCartItemsMeta(
+    where: CartItemWhereInput! = {}
+    search: String
+    sortBy: [SortCartItemsBy!]
+      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
+    orderBy: [CartItemOrderByInput!]! = []
+    first: Int
+    skip: Int! = 0
+  ): _QueryMeta
+    @deprecated(
+      reason: "This query will be removed in a future version. Please use cartItemsCount instead."
+    )
+  cartItemsCount(where: CartItemWhereInput! = {}): Int
 
   """
    Search for all Cut items which match the where clause.
@@ -1951,74 +2523,39 @@ type Query {
   cutImagesCount(where: CutImageWhereInput! = {}): Int
 
   """
-   Search for all CartItem items which match the where clause.
+   Search for all Farm items which match the where clause.
   """
-  allCartItems(
-    where: CartItemWhereInput! = {}
+  allFarms(
+    where: FarmWhereInput! = {}
     search: String
-    sortBy: [SortCartItemsBy!]
+    sortBy: [SortFarmsBy!]
       @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
-    orderBy: [CartItemOrderByInput!]! = []
+    orderBy: [FarmOrderByInput!]! = []
     first: Int
     skip: Int! = 0
-  ): [CartItem!]
+  ): [Farm!]
 
   """
-   Search for the CartItem item with the matching ID.
+   Search for the Farm item with the matching ID.
   """
-  CartItem(where: CartItemWhereUniqueInput!): CartItem
+  Farm(where: FarmWhereUniqueInput!): Farm
 
   """
-   Perform a meta-query on all CartItem items which match the where clause.
+   Perform a meta-query on all Farm items which match the where clause.
   """
-  _allCartItemsMeta(
-    where: CartItemWhereInput! = {}
+  _allFarmsMeta(
+    where: FarmWhereInput! = {}
     search: String
-    sortBy: [SortCartItemsBy!]
+    sortBy: [SortFarmsBy!]
       @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
-    orderBy: [CartItemOrderByInput!]! = []
-    first: Int
-    skip: Int! = 0
-  ): _QueryMeta
-    @deprecated(
-      reason: "This query will be removed in a future version. Please use cartItemsCount instead."
-    )
-  cartItemsCount(where: CartItemWhereInput! = {}): Int
-
-  """
-   Search for all OrderItem items which match the where clause.
-  """
-  allOrderItems(
-    where: OrderItemWhereInput! = {}
-    search: String
-    sortBy: [SortOrderItemsBy!]
-      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
-    orderBy: [OrderItemOrderByInput!]! = []
-    first: Int
-    skip: Int! = 0
-  ): [OrderItem!]
-
-  """
-   Search for the OrderItem item with the matching ID.
-  """
-  OrderItem(where: OrderItemWhereUniqueInput!): OrderItem
-
-  """
-   Perform a meta-query on all OrderItem items which match the where clause.
-  """
-  _allOrderItemsMeta(
-    where: OrderItemWhereInput! = {}
-    search: String
-    sortBy: [SortOrderItemsBy!]
-      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
-    orderBy: [OrderItemOrderByInput!]! = []
+    orderBy: [FarmOrderByInput!]! = []
     first: Int
     skip: Int! = 0
   ): _QueryMeta
     @deprecated(
-      reason: "This query will be removed in a future version. Please use orderItemsCount instead."
+      reason: "This query will be removed in a future version. Please use farmsCount instead."
     )
-  orderItemsCount(where: OrderItemWhereInput! = {}): Int
+  farmsCount(where: FarmWhereInput! = {}): Int
 
   """
    Search for all Order items which match the where clause.
@@ -2056,109 +2593,109 @@ type Query {
   ordersCount(where: OrderWhereInput! = {}): Int
 
   """
-   Search for all Address items which match the where clause.
+   Search for all OrderItem items which match the where clause.
   """
-  allAddresses(
-    where: AddressWhereInput! = {}
+  allOrderItems(
+    where: OrderItemWhereInput! = {}
     search: String
-    sortBy: [SortAddressesBy!]
+    sortBy: [SortOrderItemsBy!]
       @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
-    orderBy: [AddressOrderByInput!]! = []
+    orderBy: [OrderItemOrderByInput!]! = []
     first: Int
     skip: Int! = 0
-  ): [Address!]
+  ): [OrderItem!]
 
   """
-   Search for the Address item with the matching ID.
+   Search for the OrderItem item with the matching ID.
   """
-  Address(where: AddressWhereUniqueInput!): Address
+  OrderItem(where: OrderItemWhereUniqueInput!): OrderItem
 
   """
-   Perform a meta-query on all Address items which match the where clause.
+   Perform a meta-query on all OrderItem items which match the where clause.
   """
-  _allAddressesMeta(
-    where: AddressWhereInput! = {}
+  _allOrderItemsMeta(
+    where: OrderItemWhereInput! = {}
     search: String
-    sortBy: [SortAddressesBy!]
+    sortBy: [SortOrderItemsBy!]
       @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
-    orderBy: [AddressOrderByInput!]! = []
-    first: Int
-    skip: Int! = 0
-  ): _QueryMeta
-    @deprecated(
-      reason: "This query will be removed in a future version. Please use addressesCount instead."
-    )
-  addressesCount(where: AddressWhereInput! = {}): Int
-
-  """
-   Search for all Farm items which match the where clause.
-  """
-  allFarms(
-    where: FarmWhereInput! = {}
-    search: String
-    sortBy: [SortFarmsBy!]
-      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
-    orderBy: [FarmOrderByInput!]! = []
-    first: Int
-    skip: Int! = 0
-  ): [Farm!]
-
-  """
-   Search for the Farm item with the matching ID.
-  """
-  Farm(where: FarmWhereUniqueInput!): Farm
-
-  """
-   Perform a meta-query on all Farm items which match the where clause.
-  """
-  _allFarmsMeta(
-    where: FarmWhereInput! = {}
-    search: String
-    sortBy: [SortFarmsBy!]
-      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
-    orderBy: [FarmOrderByInput!]! = []
+    orderBy: [OrderItemOrderByInput!]! = []
     first: Int
     skip: Int! = 0
   ): _QueryMeta
     @deprecated(
-      reason: "This query will be removed in a future version. Please use farmsCount instead."
+      reason: "This query will be removed in a future version. Please use orderItemsCount instead."
     )
-  farmsCount(where: FarmWhereInput! = {}): Int
+  orderItemsCount(where: OrderItemWhereInput! = {}): Int
 
   """
-   Search for all Animal items which match the where clause.
+   Search for all Setting items which match the where clause.
   """
-  allAnimals(
-    where: AnimalWhereInput! = {}
+  allSettings(
+    where: SettingWhereInput! = {}
     search: String
-    sortBy: [SortAnimalsBy!]
+    sortBy: [SortSettingsBy!]
       @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
-    orderBy: [AnimalOrderByInput!]! = []
+    orderBy: [SettingOrderByInput!]! = []
     first: Int
     skip: Int! = 0
-  ): [Animal!]
+  ): [Setting!]
 
   """
-   Search for the Animal item with the matching ID.
+   Search for the Setting item with the matching ID.
   """
-  Animal(where: AnimalWhereUniqueInput!): Animal
+  Setting(where: SettingWhereUniqueInput!): Setting
 
   """
-   Perform a meta-query on all Animal items which match the where clause.
+   Perform a meta-query on all Setting items which match the where clause.
   """
-  _allAnimalsMeta(
-    where: AnimalWhereInput! = {}
+  _allSettingsMeta(
+    where: SettingWhereInput! = {}
     search: String
-    sortBy: [SortAnimalsBy!]
+    sortBy: [SortSettingsBy!]
       @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
-    orderBy: [AnimalOrderByInput!]! = []
+    orderBy: [SettingOrderByInput!]! = []
     first: Int
     skip: Int! = 0
   ): _QueryMeta
     @deprecated(
-      reason: "This query will be removed in a future version. Please use animalsCount instead."
+      reason: "This query will be removed in a future version. Please use settingsCount instead."
     )
-  animalsCount(where: AnimalWhereInput! = {}): Int
+  settingsCount(where: SettingWhereInput! = {}): Int
+
+  """
+   Search for all User items which match the where clause.
+  """
+  allUsers(
+    where: UserWhereInput! = {}
+    search: String
+    sortBy: [SortUsersBy!]
+      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
+    orderBy: [UserOrderByInput!]! = []
+    first: Int
+    skip: Int! = 0
+  ): [User!]
+
+  """
+   Search for the User item with the matching ID.
+  """
+  User(where: UserWhereUniqueInput!): User
+
+  """
+   Perform a meta-query on all User items which match the where clause.
+  """
+  _allUsersMeta(
+    where: UserWhereInput! = {}
+    search: String
+    sortBy: [SortUsersBy!]
+      @deprecated(reason: "sortBy has been deprecated in favour of orderBy")
+    orderBy: [UserOrderByInput!]! = []
+    first: Int
+    skip: Int! = 0
+  ): _QueryMeta
+    @deprecated(
+      reason: "This query will be removed in a future version. Please use usersCount instead."
+    )
+  usersCount(where: UserWhereInput! = {}): Int
   authenticatedItem: AuthenticatedItem
   validateUserPasswordResetToken(
     email: String!
