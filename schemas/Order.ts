@@ -10,7 +10,6 @@ import { schema } from '@keystone-next/types';
 import formatMoney from '../lib/formatMoney';
 
 export const Order = list({
-  // LEARN understand virtual fields better
   fields: {
     items: relationship({ ref: 'OrderItem.order', many: true }),
     user: relationship({ ref: 'User.orders' }),

@@ -2,7 +2,6 @@ import { list } from '@keystone-next/keystone/schema';
 import { relationship, select } from '@keystone-next/fields';
 
 export const Setting = list({
-  // LEARN understand virtual fields better
   fields: {
     user: relationship({ ref: 'User.setting' }),
     darkmode: select({

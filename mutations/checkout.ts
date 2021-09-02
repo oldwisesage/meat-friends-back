@@ -7,7 +7,6 @@ import stripeConfig from '../lib/stripe';
 
 const graphql = String.raw;
 
-// LEARN understand the top part of this better better!!
 export default async function checkout(
   root: any,
   { token }: { token: string },
@@ -52,7 +51,6 @@ export default async function checkout(
   console.log(`✅ Here is current user:`, user);
   // calc the total price for their order
   const cartItems = user.cart.filter((cartItem) => cartItem.cut);
-  // LEARN review this you idiot
   const amount = cartItems.reduce(function (
     tally: number,
     cartItem: CartItemCreateInput
